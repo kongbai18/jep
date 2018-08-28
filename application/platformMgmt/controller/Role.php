@@ -10,51 +10,112 @@ namespace app\platformMgmt\controller;
 
 use think\Controller;
 use app\platformMgmt\model\Permission as PermissionModel;
+use app\platformMgmt\model\Role as RoleModel;
 
 class Role extends Controller
 {
-    /*
+    /**
      * 角色列表
      */
     public function index(){
-        return $this->fetch();
+        //实例化类
+        $roleModel = new RoleMOdel();
+
+        //获取数据
+        try{
+            $roleData = $roleModel->roleList();
+        }catch (\Exception $e){
+            return show(1,'获取角色数据列表失败','',500);
+        }
+
+        $data = [
+            'roleData' => $roleData
+        ];
+
+        return show(1,'获取角色数据列表成功',$data);
     }
 
-    /*
+    /**
      * 添加角色
      */
-    public function add(){
-        //实例化权限类
-        $permissionModel = New PermissionModel();
+    public function save(){
+        $data = input('post.');
 
-        if(request()->isPost()) {
-            $data = input('post.');
-halt($data);
-            // validate
-            $validate = validate('Permission');
-            if(!$validate->check($data)) {
-                return $this->result('', 0, $validate->getError());
-            }
+        // validate
+        $validate = validate('Role');
 
-            //入库操作
-            try {
-                $id = $permissionModel->add($data);
-            }catch (\Exception $e) {
-                return $this->result('', 0, '新增失败');
-            }
-
-            if($id) {
-                return $this->result(['jump_url' => url('permission/index')], 1, '新增权限成功');
-            } else {
-                return $this->result('', 0, '新增失败');
-            }
-        }else{
-            //权限树状数据
-            $permissionData = $permissionModel->_getThree();
-
-            return $this->fetch('', [
-                'permissionData' => $permissionData
-            ]);
+        if(!$validate->check($data)) {
+            return show(0, $validate->getError());
         }
+
+        //入库操作
+        $roleModel = new RoleMOdel();
+         if($roleModel->addRole($data)){
+             return show(1, '新增角色成功','',201);
+         }else{
+             return show(0, '新增失败');
+         }
+    }
+
+    /**
+     * 修改角色
+     * @param $id
+     * @return mixed|void
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function edit($id){
+        if($id == 1){
+            return show(0,'超级管理员不可修改');
+        }
+
+        $data = input('get.');
+        $data['id'] = $id;
+
+        // validate
+        $validate = validate('Role');
+
+        if(!$validate->check($data)) {
+            return show(0, $validate->getError());
+        }
+
+        //入库操作
+        $roleModel = new RoleModel();
+        if($roleModel->editRole($data)){
+            return show(1,'修改成功');
+        }else{
+            return show(0,'修改是失败','',500);
+        }
+    }
+
+    /**
+     * 删除角色
+     * @param $id
+     */
+    public function delete($id){
+
+        if($id == 1){
+            return show(0,'超级管理员不可删除');
+        }
+
+        //判断角色下是否存在管理员
+        $adminRoleModel = model('admin_role');
+        try{
+            $count=$adminRoleModel->field('count(*) as count ')->where(['role_id'=>['eq',$id]])->find()->toArray();
+        }catch (\Exception $e){
+            return show(0,'删除失败','',500);
+        }
+
+        if($count['count'] !== 0){
+            return show(0,'该角色下存在管理员，不可删除');
+        }
+
+        $roleModel = new RoleModel();
+        if($roleModel->remove($id)){
+            return show(1,'删除角色成功');
+        }
+        return show(0,'删除失败','',500);
     }
 }

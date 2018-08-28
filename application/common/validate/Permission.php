@@ -13,7 +13,7 @@ class Permission extends Validate
 {
     protected $rule = [
         'name' => 'require|max:30',
-        'parent_id' => '^\d+$',
+        'parent_id' => 'require|^\d+$',
         'moudle_name' => 'max:30',
         'controller_name' => 'max:30',
         'action_name' => 'max:30',

@@ -9,13 +9,9 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
+use think\Route;
+//后端get
+Route::resource('platformMgmt/role','platformMgmt/role');
+Route::resource('platformMgmt/admin','platformMgmt/admin');
+Route::resource('platformMgmt/permission','platformMgmt/permission');
 
-];

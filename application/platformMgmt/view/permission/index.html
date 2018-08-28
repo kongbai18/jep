@@ -1,4 +1,9 @@
 ﻿{include file="public/_meta"}
+<style>
+	.hide{
+		display: none;
+	}
+</style>
 <title>权限管理</title>
 </head>
 <body>
@@ -10,7 +15,7 @@
 			<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜权限节点</button>
 		</form>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="admin_permission_add('添加权限节点','{:url(\'permission/add\')}','','310')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加权限节点</a></span> <span class="r"><strong></strong> </span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="admin_permission_add('添加权限节点','{:url(\'permission/add\')}','','')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加权限节点</a></span> <span class="r"><strong></strong> </span> </div>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
@@ -26,12 +31,12 @@
 		</thead>
 		<volist>
 		{volist name="permissionData" id="vo"}
-			<tr class="text-c">
+			<tr class="text-c tron pid<?php echo $vo['parent_id'] ?>  <?php echo ($vo['level'] == 0 || $vo['level'] == 1)?'': 'hide';?>" dat="<?php echo $vo['id'] ?>">
 				<td style="text-align: left"><?php echo str_repeat('&nbsp;',4*$vo['level']); ?>{$vo.name}</td>
 				<td>{$vo.moudle_name}</td>
 				<td>{$vo.controller_name}</td>
 				<td>{$vo.action_name}</td>
-				<td><a title="编辑" href="javascript:;" onclick="admin_permission_edit('角色编辑','admin-permission-add.html','1','','310')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_permission_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<td><a title="编辑" href="javascript:;" onclick="admin_permission_edit('权限编辑','{:url(\'permission/edit\')}?id={$vo.id}','','','')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_permission_del(this,'{:url(\'permission/delete\')}?id={$vo.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
 		{/volist}
 		</tbody>
@@ -42,6 +47,7 @@
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="__STATIC__/hadmin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__STATIC__/admin/js/tron.js"></script>
 <script type="text/javascript">
 /*
 	参数解释：
@@ -61,22 +67,19 @@ function admin_permission_edit(title,url,id,w,h){
 }
 
 /*管理员-权限-删除*/
-function admin_permission_del(obj,id){
+function admin_permission_del(obj,url){
 	layer.confirm('确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
+        jiihome_delete(obj,url);
 	});
 }
+/**
+ * 下级显示与关闭
+ */
+$('.tron').click(function() {
+    var pa = $(this).attr("dat");
+    var sub = '.pid'+pa;
+    $(sub).toggleClass('hide');
+});
 </script>
 </body>
 </html>

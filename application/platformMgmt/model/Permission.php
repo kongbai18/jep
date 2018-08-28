@@ -32,7 +32,8 @@ class Permission extends PermissionModel
         $list = $this
             ->where($filter)
             ->order($sort)
-            ->select();
+            ->select()
+            ->toArray();
 
         //树状化
         $list = $this->_getTree($list);

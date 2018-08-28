@@ -11,6 +11,7 @@ use think\Model;
 
 class Base extends Model {
 
+    protected $field = true;
     protected  $autoWriteTimestamp = true;
 
     /**
@@ -25,6 +26,13 @@ class Base extends Model {
         $this->allowField(true)->save($data);
 
         return $this->id;
+    }
+
+    public function edit($data){
+        if(!is_array($data)) {
+            exception('传递数据不合法');
+        }
+        return $this->update($data);
     }
 
 }
