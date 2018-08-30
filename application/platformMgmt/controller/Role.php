@@ -11,7 +11,7 @@ namespace app\platformmgmt\controller;
 use think\Controller;
 use app\platformmgmt\model\Permission as PermissionModel;
 use app\platformmgmt\model\Role as RoleModel;
-use app\platformmgmt\controlle\Base;
+use app\platformmgmt\controller\Base;
 
 class Role extends Base
 {

@@ -12,7 +12,7 @@ use app\common\lib\exception\ApiException;
 use app\common\lib\IAuth;
 
 use app\platformmgmt\model\Permission as PermissionModel;
-use app\platformmgmt\controlle\Base;
+use app\platformmgmt\controller\Base;
 
 class Login extends Base
 {

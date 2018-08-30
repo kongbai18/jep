@@ -10,7 +10,7 @@ namespace app\platformmgmt\controller;
 
 use think\Controller;
 use app\platformmgmt\model\Permission as PermissionModel;
-use app\platformmgmt\controlle\Base;
+use app\platformmgmt\controller\Base;
 
 class Permission extends Base
 {

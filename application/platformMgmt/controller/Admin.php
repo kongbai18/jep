@@ -10,8 +10,7 @@ namespace app\platformmgmt\controller;
 
 use app\platformmgmt\model\Admin as AdminModel;
 use app\common\lib\IAuth;
-use app\platformmgmt\controlle\Base;
-
+use app\platformmgmt\controller\Base;
 class Admin extends Base
 {
     /**

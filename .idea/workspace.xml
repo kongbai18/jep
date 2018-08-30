@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="688f18ee-1104-4b21-ab82-a7f1846b63cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/controller/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/controller/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/controller/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/controller/Base.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/controller/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/controller/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/controller/Login.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/controller/Login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/controller/Permission.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/controller/Permission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/controller/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/controller/Role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/model/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/model/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/model/Permission.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/model/Permission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/platformMgmt/model/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/platformMgmt/model/Role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,15 +29,17 @@
           <entry key="htaccess" value="2" />
           <entry key="html" value="33" />
           <entry key="js" value="5" />
-          <entry key="php" value="118" />
+          <entry key="php" value="124" />
           <entry key="sql" value="7" />
+          <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="33" />
           <entry key="JavaScript" value="5" />
-          <entry key="PHP" value="118" />
+          <entry key="PHP" value="124" />
+          <entry key="PLAIN_TEXT" value="1" />
           <entry key="SQL" value="7" />
           <entry key="htaccess" value="2" />
         </counts>
@@ -54,7 +48,7 @@
         <counts>
           <entry key="html" value="747" />
           <entry key="js" value="98" />
-          <entry key="php" value="10938" />
+          <entry key="php" value="10947" />
           <entry key="sql" value="244" />
         </counts>
       </usages-collector>
@@ -62,7 +56,7 @@
         <counts>
           <entry key="HTML" value="747" />
           <entry key="JavaScript" value="98" />
-          <entry key="PHP" value="10938" />
+          <entry key="PHP" value="10947" />
           <entry key="SQL" value="244" />
         </counts>
       </usages-collector>
@@ -81,19 +75,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Role.php">
+        <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="13" column="20" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="20" />
+            <state relative-caret-position="133">
+              <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+              <folding>
+                <element signature="e#140#187#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Permission.php">
+        <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Role.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+            <state relative-caret-position="152">
+              <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
               <folding>
                 <element signature="e#141#162#0#PHP" expanded="true" />
               </folding>
@@ -102,31 +99,40 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/platformMgmt/model/Permission.php">
+        <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Permission.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            <state relative-caret-position="133">
+              <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/platformMgmt/model/Role.php">
+        <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Base.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            <state relative-caret-position="152">
+              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
               <folding>
-                <element signature="e#135#174#0#PHP" expanded="true" />
+                <element signature="e#140#161#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.php">
+        <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="152">
+              <caret line="13" column="57" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -135,51 +141,32 @@
         <entry file="file://$PROJECT_DIR$/application/.htaccess">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/.htaccess">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="95">
-              <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
+              <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Base.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Login.php">
+        <entry file="file://$PROJECT_DIR$/application/config.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="171">
-              <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-              <folding>
-                <element signature="e#141#183#0#PHP" expanded="true" />
-              </folding>
+              <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/platformMgmt/model/Admin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-              <folding>
-                <element signature="e#136#177#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/public/robots.txt">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -235,7 +222,6 @@
         <option value="$PROJECT_DIR$/application/common/validate/Admin.php" />
         <option value="$PROJECT_DIR$/application/common.php" />
         <option value="$PROJECT_DIR$/application/extra/code.php" />
-        <option value="$PROJECT_DIR$/application/config.php" />
         <option value="$PROJECT_DIR$/application/platformMgmt/controller/Base.php" />
         <option value="$PROJECT_DIR$/application/platformMgmt/controller/Index.php" />
         <option value="$PROJECT_DIR$/application/platformMgmt/controller/Admin.php" />
@@ -246,6 +232,11 @@
         <option value="$PROJECT_DIR$/application/platformMgmt/model/Permission.php" />
         <option value="$PROJECT_DIR$/application/platformMgmt/model/Role.php" />
         <option value="$PROJECT_DIR$/public/.htaccess" />
+        <option value="$PROJECT_DIR$/application/config.php" />
+        <option value="$PROJECT_DIR$/application/platformmgmt/controller/Permission.php" />
+        <option value="$PROJECT_DIR$/application/platformmgmt/controller/Role.php" />
+        <option value="$PROJECT_DIR$/application/platformmgmt/controller/Login.php" />
+        <option value="$PROJECT_DIR$/application/platformmgmt/controller/Admin.php" />
       </list>
     </option>
   </component>
@@ -274,7 +265,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1153" />
@@ -303,7 +294,15 @@
             <path>
               <item name="jep" type="b2602c69:ProjectViewProjectNode" />
               <item name="jep" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="platformmgmt" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jep" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jep" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="platformmgmt" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jep" type="b2602c69:ProjectViewProjectNode" />
@@ -378,15 +377,15 @@
       <workItem from="1535331911371" duration="21854000" />
       <workItem from="1535418012760" duration="29859000" />
       <workItem from="1535506304056" duration="28424000" />
-      <workItem from="1535591262210" duration="18529000" />
+      <workItem from="1535591262210" duration="18921000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98666000" />
+    <option name="totallyTimeSpent" value="99058000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15138593" />
@@ -417,15 +416,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#6#80#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/thinkphp/library/think/Collection.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -464,7 +454,7 @@
     <entry file="file://$PROJECT_DIR$/application/extra/queue.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/login/index.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/login/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
@@ -478,14 +468,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/admin/edit.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/admin/edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/permission/edit.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/permission/edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="114" selection-start-line="5" selection-start-column="114" selection-end-line="5" selection-end-column="114" />
@@ -499,34 +489,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/public/_meta.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/public/_meta.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/public/_footer.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/public/_footer.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/permission/add.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/permission/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="124" selection-start-line="5" selection-start-column="124" selection-end-line="5" selection-end-column="124" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/admin/add.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/admin/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="109" selection-start-line="5" selection-start-column="109" selection-end-line="5" selection-end-column="109" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/role/add.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/role/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-950">
           <caret line="7" column="127" selection-start-line="7" selection-start-column="127" selection-end-line="7" selection-end-column="127" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/role/index.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/role/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="22" column="44" lean-forward="true" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
@@ -547,7 +537,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/admin/index.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/admin/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="591">
           <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
@@ -561,14 +551,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/permission/index.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/permission/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="71" column="32" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/view/role/edit.html">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/view/role/edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
@@ -645,13 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="16" column="13" lean-forward="true" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/route.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -676,55 +659,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Base.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-          <folding>
-            <element signature="e#141#183#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Permission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-          <folding>
-            <element signature="e#141#162#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/controller/Role.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/model/Admin.php">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/model/Admin.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
@@ -734,14 +669,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/model/Permission.php">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/model/Permission.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/platformMgmt/model/Role.php">
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/model/Role.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
           <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
@@ -754,21 +689,82 @@
     <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
-          <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
+          <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/robots.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+          <folding>
+            <element signature="e#140#187#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="13" column="57" selection-start-line="13" selection-start-column="57" selection-end-line="13" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Permission.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Role.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="13" column="37" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
+          <folding>
+            <element signature="e#141#162#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Base.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/platformmgmt/controller/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <folding>
+            <element signature="e#140#161#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
