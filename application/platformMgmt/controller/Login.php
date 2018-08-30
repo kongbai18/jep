@@ -6,12 +6,13 @@
  * Time: 17:04
  */
 
-namespace app\platformMgmt\controller;
+namespace app\platformmgmt\controller;
 
 use app\common\lib\exception\ApiException;
 use app\common\lib\IAuth;
 
-use app\platformMgmt\model\Permission as PermissionModel;
+use app\platformmgmt\model\Permission as PermissionModel;
+use app\platformmgmt\controlle\Base;
 
 class Login extends Base
 {

@@ -6,11 +6,12 @@
  * Time: 10:49
  */
 
-namespace app\platformMgmt\controller;
+namespace app\platformmgmt\controller;
 
 use think\Controller;
-use app\platformMgmt\model\Permission as PermissionModel;
-use app\platformMgmt\model\Role as RoleModel;
+use app\platformmgmt\model\Permission as PermissionModel;
+use app\platformmgmt\model\Role as RoleModel;
+use app\platformmgmt\controlle\Base;
 
 class Role extends Base
 {

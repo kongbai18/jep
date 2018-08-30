@@ -6,12 +6,12 @@
  * Time: 16:39
  */
 
-namespace app\platformMgmt\controller;
+namespace app\platformmgmt\controller;
 
 
 use think\Controller;
 use app\common\lib\exception\ApiException;
-use app\platformMgmt\model\Permission as PermissionModel;
+use app\platformmgmt\model\Permission as PermissionModel;
 
 class Base extends Controller
 {

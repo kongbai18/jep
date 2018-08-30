@@ -6,7 +6,7 @@
  * Time: 15:02
  */
 
-namespace app\platformMgmt\model;
+namespace app\platformmgmt\model;
 
 use app\common\model\Admin as AdminModel;
 use think\Db;

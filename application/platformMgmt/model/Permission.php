@@ -6,7 +6,7 @@
  * Time: 13:17
  */
 
-namespace app\platformMgmt\model;
+namespace app\platformmgmt\model;
 
 use app\common\model\Permission as PermissionModel;
 

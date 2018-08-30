@@ -6,10 +6,11 @@
  * Time: 9:57
  */
 
-namespace app\platformMgmt\controller;
+namespace app\platformmgmt\controller;
 
-use app\platformMgmt\model\Admin as AdminModel;
+use app\platformmgmt\model\Admin as AdminModel;
 use app\common\lib\IAuth;
+use app\platformmgmt\controlle\Base;
 
 class Admin extends Base
 {

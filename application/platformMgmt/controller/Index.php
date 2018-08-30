@@ -6,10 +6,10 @@
  * Time: 9:39
  */
 
-namespace app\platformMgmt\controller;
+namespace app\platformmgmt\controller;
 
 use think\Controller;
-use app\platformMgmt\controller\Base;
+use app\platformmgmt\controller\Base;
 
 class Index extends Base
 {
