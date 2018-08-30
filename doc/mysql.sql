@@ -5,13 +5,15 @@ CREATE TABLE `jiihome_admin` (
   `password` char(32) NOT NULL COMMENT '密码',
   `phone` varchar(30) NOT NULL default '' COMMENT '手机号',
   `email` varchar(30) NOT NULL default '' COMMENT '邮箱',
-  `is_index` tinyint unsigned not null default 0 comment '是否启用',
+  `status` tinyint unsigned not null default 0 comment '是否启用',
+  `last_login_ip` int(10) unsigned NOT NULL DEFAULT '0',
+  `last_login_time` int(11) unsigned NOT NULL DEFAULT '0',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员';
 
-INSERT INTO `jiihome_admin` (`id`, `username`, `password`,`is_index`) VALUES
+INSERT INTO `jiihome_admin` (`id`, `username`, `password`,`status`) VALUES
 (1, 'root', '5e677af31eddafcdad40cf3ed50d1a25','1');
 
 drop table if exists `jiihome_role`;
@@ -28,7 +30,7 @@ drop table if exists `jiihome_permission`;
 CREATE TABLE `jiihome_permission` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id',
   `name` varchar(30) NOT NULL COMMENT '权限名称',
-  `moudle_name` varchar(30) NOT NULL default '' COMMENT '模型名称',
+  `module_name` varchar(30) NOT NULL default '' COMMENT '模型名称',
   `controller_name` varchar(30) NOT NULL default '' COMMENT '控制器名称',
   `action_name` varchar(30) NOT NULL default '' COMMENT '方法名称',
   `parent_id` int UNSIGNED NOT NULL COMMENT '上级分类ID',

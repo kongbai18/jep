@@ -15,3 +15,4 @@ Route::resource('platformMgmt/role','platformMgmt/role');
 Route::resource('platformMgmt/admin','platformMgmt/admin');
 Route::resource('platformMgmt/permission','platformMgmt/permission');
 
+Route::get('platformMgmt/login');

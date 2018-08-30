@@ -10,33 +10,50 @@ namespace app\platformMgmt\controller;
 
 
 use think\Controller;
-use think\Request;
+use app\common\lib\exception\ApiException;
+use app\platformMgmt\model\Permission as PermissionModel;
 
 class Base extends Controller
 {
+
     /**
-     * 初始化的方法
+     * 初始化
+     * @throws ApiException
      */
-    public function _initialize() {
+    public function _initialize()
+    {
         // 判定用户是否登录
         $isLogin = $this->isLogin();
-        if(!$isLogin) {
-            return $this->redirect('login/index');
-        }
-    }
 
+        if(!$isLogin){
+            throw new ApiException('暂未登陆',200,config('code.logout'));
+        }
+
+        $this->chkPer();
+    }
     /**
      * 判定是否登录
      * @return bool
      */
-    public function isLogin() {
-        return true;
+    protected function isLogin() {
         //获取session
         $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
+
         if($user && $user->id) {
             return true;
+        }else{
+            return false;
         }
-        return false;
+    }
+
+    protected function chkPer(){
+        $permisssionModel = new PermissionModel();
+
+        $per = $permisssionModel->chkPri();
+
+        if(!$per){
+            throw new ApiException('无操作权限',400,config('code.unper'));
+        }
     }
 
 }

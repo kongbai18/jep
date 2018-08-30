@@ -11,6 +11,7 @@ class ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348
         '1cfd2761b63b0a29ed23657ea394cb2d' => __DIR__ . '/..' . '/topthink/think-captcha/src/helper.php',
         'ddc3cd2a04224f9638c5d0de6a69c7e3' => __DIR__ . '/..' . '/topthink/think-migration/src/config.php',
         'cc56288302d9df745d97c934d6a6e5f0' => __DIR__ . '/..' . '/topthink/think-queue/src/common.php',
+        '0ccdf99b8f62f02c52cba55802e0c2e7' => __DIR__ . '/..' . '/zircote/swagger-php/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -27,9 +28,18 @@ class ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348
         array (
             'app\\' => 4,
         ),
+        'S' => 
+        array (
+            'Symfony\\Component\\Finder\\' => 25,
+            'Swagger\\' => 8,
+        ),
         'P' => 
         array (
             'Phinx\\' => 6,
+        ),
+        'D' => 
+        array (
+            'Doctrine\\Common\\Annotations\\' => 28,
         ),
     );
 
@@ -64,9 +74,31 @@ class ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348
         array (
             0 => __DIR__ . '/../..' . '/application',
         ),
+        'Symfony\\Component\\Finder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/finder',
+        ),
+        'Swagger\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zircote/swagger-php/src',
+        ),
         'Phinx\\' => 
         array (
             0 => __DIR__ . '/..' . '/topthink/think-migration/phinx/src/Phinx',
+        ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'D' => 
+        array (
+            'Doctrine\\Common\\Lexer\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
+            ),
         ),
     );
 
@@ -75,6 +107,7 @@ class ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

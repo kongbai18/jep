@@ -1,46 +1,180 @@
 [
     {
-        "name": "topthink/think-installer",
-        "version": "v1.0.12",
-        "version_normalized": "1.0.12.0",
+        "name": "doctrine/annotations",
+        "version": "v1.4.0",
+        "version_normalized": "1.4.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/top-think/think-installer.git",
-            "reference": "1be326e68f63de4e95977ed50f46ae75f017556d"
+            "url": "https://github.com/doctrine/annotations.git",
+            "reference": "54cacc9b81758b14e3ce750f205a393d52339e97"
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/think-installer/1be326e68f63de4e95977ed50f46ae75f017556d.zip",
-            "reference": "1be326e68f63de4e95977ed50f46ae75f017556d",
+            "url": "https://api.github.com/repos/doctrine/annotations/zipball/54cacc9b81758b14e3ce750f205a393d52339e97",
+            "reference": "54cacc9b81758b14e3ce750f205a393d52339e97",
             "shasum": ""
         },
         "require": {
-            "composer-plugin-api": "^1.0"
+            "doctrine/lexer": "1.*",
+            "php": "^5.6 || ^7.0"
         },
         "require-dev": {
-            "composer/composer": "1.0.*@dev"
+            "doctrine/cache": "1.*",
+            "phpunit/phpunit": "^5.7"
         },
-        "time": "2017-05-27T06:58:09+00:00",
-        "type": "composer-plugin",
+        "time": "2017-02-24T16:22:25+00:00",
+        "type": "library",
         "extra": {
-            "class": "think\\composer\\Plugin"
+            "branch-alias": {
+                "dev-master": "1.4.x-dev"
+            }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "think\\composer\\": "src"
+                "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "Apache-2.0"
+            "MIT"
         ],
         "authors": [
             {
-                "name": "yunwuxin",
-                "email": "448901948@qq.com"
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
             }
+        ],
+        "description": "Docblock Annotations Parser",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "annotations",
+            "docblock",
+            "parser"
         ]
+    },
+    {
+        "name": "doctrine/lexer",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/lexer.git",
+            "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
+            "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "time": "2014-09-09T13:34:57+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\Lexer\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "lexer",
+            "parser"
+        ]
+    },
+    {
+        "name": "symfony/finder",
+        "version": "v3.4.15",
+        "version_normalized": "3.4.15.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/finder.git",
+            "reference": "8a84fcb207451df0013b2c74cbbf1b62d47b999a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/8a84fcb207451df0013b2c74cbbf1b62d47b999a",
+            "reference": "8a84fcb207451df0013b2c74cbbf1b62d47b999a",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.5.9|>=7.0.8"
+        },
+        "time": "2018-07-26T11:19:56+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Finder\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Finder Component",
+        "homepage": "https://symfony.com"
     },
     {
         "name": "topthink/framework",
@@ -53,7 +187,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/framework/e6b7e87586ca86777317ec54c32eaf4e8d2bf211.zip",
+            "url": "https://api.github.com/repos/top-think/framework/zipball/e6b7e87586ca86777317ec54c32eaf4e8d2bf211",
             "reference": "e6b7e87586ca86777317ec54c32eaf4e8d2bf211",
             "shasum": ""
         },
@@ -96,6 +230,82 @@
         ]
     },
     {
+        "name": "topthink/think-captcha",
+        "version": "v1.0.7",
+        "version_normalized": "1.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/think-captcha.git",
+            "reference": "0c55455df26a1626a60d0dc35d2d89002b741d44"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/top-think/think-captcha/zipball/0c55455df26a1626a60d0dc35d2d89002b741d44",
+            "reference": "0c55455df26a1626a60d0dc35d2d89002b741d44",
+            "shasum": ""
+        },
+        "time": "2016-07-06T01:47:11+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "think\\captcha\\": "src/"
+            },
+            "files": [
+                "src/helper.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "yunwuxin",
+                "email": "448901948@qq.com"
+            }
+        ],
+        "description": "captcha package for thinkphp5"
+    },
+    {
+        "name": "topthink/think-helper",
+        "version": "v1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/think-helper.git",
+            "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/top-think/think-helper/zipball/0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f",
+            "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f",
+            "shasum": ""
+        },
+        "time": "2017-04-05T07:15:37+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "think\\helper\\": "src"
+            },
+            "files": [
+                "src/helper.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "yunwuxin",
+                "email": "448901948@qq.com"
+            }
+        ],
+        "description": "The ThinkPHP5 Helper Package"
+    },
+    {
         "name": "topthink/think-image",
         "version": "v1.0.7",
         "version_normalized": "1.0.7.0",
@@ -106,7 +316,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/think-image/8586cf47f117481c6d415b20f7dedf62e79d5512.zip",
+            "url": "https://api.github.com/repos/top-think/think-image/zipball/8586cf47f117481c6d415b20f7dedf62e79d5512",
             "reference": "8586cf47f117481c6d415b20f7dedf62e79d5512",
             "shasum": ""
         },
@@ -138,30 +348,36 @@
         "description": "The ThinkPHP5 Image Package"
     },
     {
-        "name": "topthink/think-captcha",
-        "version": "v1.0.7",
-        "version_normalized": "1.0.7.0",
+        "name": "topthink/think-installer",
+        "version": "v1.0.12",
+        "version_normalized": "1.0.12.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/top-think/think-captcha.git",
-            "reference": "0c55455df26a1626a60d0dc35d2d89002b741d44"
+            "url": "https://github.com/top-think/think-installer.git",
+            "reference": "1be326e68f63de4e95977ed50f46ae75f017556d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/think-captcha/0c55455df26a1626a60d0dc35d2d89002b741d44.zip",
-            "reference": "0c55455df26a1626a60d0dc35d2d89002b741d44",
+            "url": "https://api.github.com/repos/top-think/think-installer/zipball/1be326e68f63de4e95977ed50f46ae75f017556d",
+            "reference": "1be326e68f63de4e95977ed50f46ae75f017556d",
             "shasum": ""
         },
-        "time": "2016-07-06T01:47:11+00:00",
-        "type": "library",
+        "require": {
+            "composer-plugin-api": "^1.0"
+        },
+        "require-dev": {
+            "composer/composer": "1.0.*@dev"
+        },
+        "time": "2017-05-27T06:58:09+00:00",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "think\\composer\\Plugin"
+        },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "think\\captcha\\": "src/"
-            },
-            "files": [
-                "src/helper.php"
-            ]
+                "think\\composer\\": "src"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -172,44 +388,7 @@
                 "name": "yunwuxin",
                 "email": "448901948@qq.com"
             }
-        ],
-        "description": "captcha package for thinkphp5"
-    },
-    {
-        "name": "topthink/think-mongo",
-        "version": "v1.8.2",
-        "version_normalized": "1.8.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/top-think/think-mongo.git",
-            "reference": "5433e971b4892b09cbec49090c690f5d4350a981"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/think-mongo/5433e971b4892b09cbec49090c690f5d4350a981.zip",
-            "reference": "5433e971b4892b09cbec49090c690f5d4350a981",
-            "shasum": ""
-        },
-        "time": "2018-01-30T07:12:02+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "think\\mongo\\": "src"
-            },
-            "files": []
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "liu21st",
-                "email": "liu21st@gmail.com"
-            }
-        ],
-        "description": "mongodb driver for thinkphp5"
+        ]
     },
     {
         "name": "topthink/think-migration",
@@ -222,7 +401,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/think-migration/8e489f8d38a39876690c0e00fcf9a54ae92c4d3d.zip",
+            "url": "https://api.github.com/repos/top-think/think-migration/zipball/8e489f8d38a39876690c0e00fcf9a54ae92c4d3d",
             "reference": "8e489f8d38a39876690c0e00fcf9a54ae92c4d3d",
             "shasum": ""
         },
@@ -253,30 +432,28 @@
         ]
     },
     {
-        "name": "topthink/think-helper",
-        "version": "v1.0.6",
-        "version_normalized": "1.0.6.0",
+        "name": "topthink/think-mongo",
+        "version": "v1.8.2",
+        "version_normalized": "1.8.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/top-think/think-helper.git",
-            "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f"
+            "url": "https://github.com/top-think/think-mongo.git",
+            "reference": "5433e971b4892b09cbec49090c690f5d4350a981"
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/think-helper/0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f.zip",
-            "reference": "0c99dc625b0d2d4124e1b6ca15a3ad6f0125963f",
+            "url": "https://api.github.com/repos/top-think/think-mongo/zipball/5433e971b4892b09cbec49090c690f5d4350a981",
+            "reference": "5433e971b4892b09cbec49090c690f5d4350a981",
             "shasum": ""
         },
-        "time": "2017-04-05T07:15:37+00:00",
+        "time": "2018-01-30T07:12:02+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "think\\helper\\": "src"
+                "think\\mongo\\": "src"
             },
-            "files": [
-                "src/helper.php"
-            ]
+            "files": []
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -284,11 +461,11 @@
         ],
         "authors": [
             {
-                "name": "yunwuxin",
-                "email": "448901948@qq.com"
+                "name": "liu21st",
+                "email": "liu21st@gmail.com"
             }
         ],
-        "description": "The ThinkPHP5 Helper Package"
+        "description": "mongodb driver for thinkphp5"
     },
     {
         "name": "topthink/think-queue",
@@ -301,7 +478,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://files.phpcomposer.com/files/top-think/think-queue/ad709611d516e13d6760234bc98e91faa901cae8.zip",
+            "url": "https://api.github.com/repos/top-think/think-queue/zipball/ad709611d516e13d6760234bc98e91faa901cae8",
             "reference": "ad709611d516e13d6760234bc98e91faa901cae8",
             "shasum": ""
         },
@@ -336,5 +513,69 @@
             }
         ],
         "description": "The ThinkPHP5 Queue Package"
+    },
+    {
+        "name": "zircote/swagger-php",
+        "version": "2.0.13",
+        "version_normalized": "2.0.13.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zircote/swagger-php.git",
+            "reference": "8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/zircote/swagger-php/zipball/8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0",
+            "reference": "8b42fdc3d8c5a5e0d1f8d344aa359822c9f085e0",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/annotations": "*",
+            "php": ">=5.6",
+            "symfony/finder": ">=2.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": ">=4.8.35 <=5.6",
+            "squizlabs/php_codesniffer": ">=2.7",
+            "zendframework/zend-form": "<2.8"
+        },
+        "time": "2017-12-01T09:22:05+00:00",
+        "bin": [
+            "bin/swagger"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Swagger\\": "src"
+            },
+            "files": [
+                "src/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache2"
+        ],
+        "authors": [
+            {
+                "name": "Robert Allen",
+                "email": "zircote@gmail.com",
+                "homepage": "http://www.zircote.com"
+            },
+            {
+                "name": "Bob Fanger",
+                "email": "bfanger@gmail.com",
+                "homepage": "http://bfanger.nl"
+            }
+        ],
+        "description": "Swagger-PHP - Generate interactive documentation for your RESTful API using phpdoc annotations",
+        "homepage": "https://github.com/zircote/swagger-php/",
+        "keywords": [
+            "api",
+            "json",
+            "rest",
+            "service discovery"
+        ]
     }
 ]
