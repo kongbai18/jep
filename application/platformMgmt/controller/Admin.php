@@ -18,7 +18,7 @@ class Admin extends Base
      * 这里需要一个主`Swagger`定义：
      * @SWG\Swagger(
      *   schemes={"http"},
-     *   host="jiihome.shimentown.com",
+     *   host="qebm7n.natappfree.cc/jep/public",
      *   @SWG\Info(
      *     title="几和后端API文档",
      *     version="2.0",

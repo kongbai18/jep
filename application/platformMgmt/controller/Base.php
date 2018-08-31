@@ -8,7 +8,7 @@
 
 namespace app\platformmgmt\controller;
 
-
+\think\Hook::listen('response_send');
 use think\Controller;
 use app\common\lib\exception\ApiException;
 use app\platformmgmt\model\Permission as PermissionModel;
