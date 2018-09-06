@@ -26,16 +26,16 @@ class Login extends Base
 
     /**
      *
-     * @SWG\Post(path="/platformMgmt/login",
+     * @SWG\Get(path="/platformMgmt/v1/login",
      *   summary="后台登陆",
      *   description="后台系统登陆功能，返回二级权限列表",
-     *     @SWG\Parameter(name="username",in="formData",type="string",required="true",
+     *     @SWG\Parameter(name="username",in="query",type="string",required="true",
      *      description="用户名"
      *   ),
-     *     @SWG\Parameter(name="password",in="formData",type="string",required="true",
+     *     @SWG\Parameter(name="password",in="query",type="string",required="true",
      *      description="用户密码"
      *   ),
-     *     @SWG\Parameter(name="code",in="formData",type="string",required="true",
+     *     @SWG\Parameter(name="code",in="query",type="string",required="true",
      *      description="验证码"
      *   ),
      *   @SWG\Response(response="返回json数组,包含状态码status,描述message，数据data，以及头部httpCode",
@@ -57,6 +57,7 @@ class Login extends Base
         if(!$validate->check($data)) {
             return show(config('code.error'), $validate->getError());
         }
+
 
         if (!captcha_check($data['code'])) {
             return show(config('code.error'),'验证码错误');
@@ -106,7 +107,7 @@ class Login extends Base
 
     /**
      *
-     * @SWG\Get(path="/platformMgmt/login/logout",
+     * @SWG\Get(path="/platformMgmt/v1/logout",
      *   summary="退出后台登陆",
      *   description="后台系统登陆功能，返回二级权限列表",
      *   @SWG\Response(response="返回json数组,包含状态码status,描述message，数据data，以及头部httpCode",

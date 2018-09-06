@@ -18,7 +18,7 @@ class Admin extends Base
      * 这里需要一个主`Swagger`定义：
      * @SWG\Swagger(
      *   schemes={"http"},
-     *   host="qebm7n.natappfree.cc/jep/public",
+     *   host="localhost/jep/public",
      *   @SWG\Info(
      *     title="几和后端API文档",
      *     version="2.0",
@@ -28,18 +28,7 @@ class Admin extends Base
 
     /**
      *
-     * @SWG\Get(path="/captcha",
-     *   summary="获取验证码接口",
-     *   description="连接后可以携带任意参数刷新验证码",
-     *   @SWG\Response(response="返回验证码图片",
-     *      description="返回验证码图片"
-     *   )
-     * )
-     */
-
-    /**
-     *
-     * @SWG\Get(path="/platformMgmt/admin",
+     * @SWG\Get(path="/platformMgmt/v1/admin",
      *   summary="获取管理员列表信息",
      *   description="请求该接口需要先登录并且有此权限,不需要传参",
      *   @SWG\Response(response="返回json数组,包含状态码status,描述message，数据data，以及头部httpCode",
@@ -61,7 +50,7 @@ class Admin extends Base
 
     /**
      *
-     * @SWG\Get(path="/platformMgmt/admin/{id}",
+     * @SWG\Get(path="/platformMgmt/v1/admin/{id}",
      *   summary="获取管理员信息",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="id",in="path",type="number",required="true",
@@ -92,7 +81,7 @@ class Admin extends Base
 
     /**
      *
-     * @SWG\Post(path="/platformMgmt/admin",
+     * @SWG\Post(path="/platformMgmt/v1/admin",
      *   summary="添加管理员",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="username",in="formData",type="string",required="true",
@@ -147,7 +136,7 @@ class Admin extends Base
 
     /**
      *
-     * @SWG\Get(path="/platformMgmt/admin/{id}/edit",
+     * @SWG\Get(path="/platformMgmt/v1/admin/{id}/edit",
      *   summary="修改管理员信息",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="id",in="path",type="string",required="true",
@@ -215,7 +204,7 @@ class Admin extends Base
 
     /**
      *
-     * @SWG\Post(path="/platformMgmt/admin/setPassword",
+     * @SWG\Post(path="/platformMgmt/v1/admin/setPassword",
      *   summary="修改个人信息",
      *   description="请求该接口需要先登录",
      *     @SWG\Parameter(name="username",in="formData",type="string",required="true",
@@ -282,7 +271,7 @@ class Admin extends Base
 
     /**
      *
-     * @SWG\Delete(path="/platformMgmt/admin/{id}",
+     * @SWG\Delete(path="/platformMgmt/v1/admin/{id}",
      *   summary="删除管理员",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="id",in="path",type="number",required="true",
@@ -307,7 +296,7 @@ class Admin extends Base
 
     /**
      *
-     * @SWG\Post(path="/platformMgmt/admin/setStatus",
+     * @SWG\Post(path="/platformMgmt/v1/admin/setStatus",
      *   summary="设置管理员状态",
      *   description="请求该接口需要先登录并且有此权限",
      *   @SWG\Parameter(name="id",in="formData",type="number",required="true",

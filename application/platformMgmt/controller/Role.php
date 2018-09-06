@@ -17,7 +17,7 @@ class Role extends Base
 {
     /**
      *
-     * @SWG\Get(path="/platformMgmt/role",
+     * @SWG\Get(path="/platformMgmt/v1/role",
      *   summary="获取角色列表信息",
      *   description="请求该接口需要先登录并且有此权限,不需要传参",
      *   @SWG\Response(response="返回json数组,包含状态码status,描述message，数据data，以及头部httpCode",
@@ -41,7 +41,7 @@ class Role extends Base
 
     /**
      *
-     * @SWG\Get(path="/platformMgmt/role/{id}",
+     * @SWG\Get(path="/platformMgmt/v1/role/{id}",
      *   summary="获取角色信息",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="id",in="path",type="number",required="true",
@@ -74,7 +74,7 @@ class Role extends Base
 
     /**
      *
-     * @SWG\Post(path="/platformMgmt/role",
+     * @SWG\Post(path="/platformMgmt/v1/role",
      *   summary="添加角色",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="name",in="formData",type="string",required="true",
@@ -113,7 +113,7 @@ class Role extends Base
 
     /**
      *
-     * @SWG\Get(path="/platformMgmt/role/{id}/edit",
+     * @SWG\Get(path="/platformMgmt/v1/role/{id}/edit",
      *   summary="修改角色信息",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="id",in="path",type="string",required="true",
@@ -160,7 +160,7 @@ class Role extends Base
 
     /**
      *
-     * @SWG\Delete(path="/platformMgmt/role/{id}",
+     * @SWG\Delete(path="/platformMgmt/v1/role/{id}",
      *   summary="删除角色",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="id",in="path",type="number",required="true",
