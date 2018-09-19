@@ -220,12 +220,10 @@ class Category extends Base
     public function delete($id){
 
         //判断分类下是否存在商品
-        $rolePermission = model('role_permission');
-
-        $count=$rolePermission->field('count(*) as count ')->where(['per_id'=>['eq',$id]])->find()->toArray();
+        $count=model('goods')->where(['category_id'=>['eq',$id]])->count();
 
 
-        if($count['count'] !== 0){
+        if($count > 0){
             return show(config('code.error'),'有商品包含此分类，不可删除');
         }
 
@@ -233,12 +231,12 @@ class Category extends Base
         $categoryModel = New CategoryModel();
         //判断是否存在子集权限
         try{
-            $child=$categoryModel->field('count(*) as count ')->where(['parent_id'=>['eq',$id]])->find()->toArray();
+            $child=$categoryModel->where(['parent_id'=>['eq',$id]])->count();
         }catch (\Exception $e){
             return show(config('code.error'),'删除失败','',500);
         }
 
-        if($child['count'] !== 0){
+        if($child > 0){
             return show(config('code.error'),'删除失败,有子集分类未删除');
         }
 

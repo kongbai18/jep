@@ -15,7 +15,6 @@ use app\platformmgmt\model\Permission as PermissionModel;
 
 class Base extends Controller
 {
-
     /**
      * 初始化
      * @throws ApiException
@@ -46,6 +45,10 @@ class Base extends Controller
         }
     }
 
+    /**
+     * 检查操作权限
+     * @throws ApiException
+     */
     protected function chkPer(){
         $permisssionModel = new PermissionModel();
 

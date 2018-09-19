@@ -238,6 +238,332 @@
                 }
             }
         },
+        "/platformMgmt/v1/article": {
+            "get": {
+                "summary": "\u83b7\u53d6\u6587\u7ae0\u5217\u8868\u4fe1\u606f",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650,\u4e0d\u9700\u8981\u4f20\u53c2",
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\u8fd4\u56de\u6570\u636edata\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650"
+                    }
+                }
+            },
+            "post": {
+                "summary": "\u6dfb\u52a0\u6587\u7ae0",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "article_name",
+                        "in": "formData",
+                        "description": "\u6587\u7ae0\u6807\u9898,\u4e0d\u5f97\u8d85\u8fc750\u5b57\u7b26",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "article_brief",
+                        "in": "formData",
+                        "description": "\u6587\u7ae0\u7b80\u4ecb\uff0c\u4e0d\u5f97\u9ad8\u4e8e150\u4f4d\u5b57\u7b26",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "cate_id",
+                        "in": "formData",
+                        "description": "\u6587\u7ae0\u6240\u5c5e\u5206\u7c7b\uff0c\u6839\u636e\u6587\u7ae0\u5206\u7c7b\u5217\u8868\u9009\u62e9",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "image_url",
+                        "in": "formData",
+                        "description": "\u5c01\u9762\u56fe\uff0c\u6839\u636e\u56fe\u7247\u4e0a\u4f20\u7c7b\u83b7\u53d6\u5f97\u5230\u7684\u5b58\u50a8\u8def\u5f84",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort_id",
+                        "in": "formData",
+                        "description": "\u6392\u5e8f",
+                        "type": "string"
+                    },
+                    {
+                        "name": "is_index",
+                        "in": "formData",
+                        "description": "\u662f\u5426\u5c55\u793a",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/article/{article_id}": {
+            "get": {
+                "summary": "\u83b7\u53d6\u6587\u7ae0\u8be6\u7ec6\u4fe1\u606f",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "description": "\u7ba1\u7406\u5458ID",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\u8fd4\u56de\u6570\u636edata\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/admin/{article_id}/article": {
+            "get": {
+                "summary": "\u4fee\u6539\u6587\u7ae0",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "description": "\u6587\u7ae0Id",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "article_name",
+                        "in": "query",
+                        "description": "\u6587\u7ae0\u6807\u9898,\u4e0d\u5f97\u8d85\u8fc750\u5b57\u7b26",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "article_brief",
+                        "in": "query",
+                        "description": "\u6587\u7ae0\u7b80\u4ecb\uff0c\u4e0d\u5f97\u9ad8\u4e8e150\u4f4d\u5b57\u7b26",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "cate_id",
+                        "in": "query",
+                        "description": "\u6587\u7ae0\u6240\u5c5e\u5206\u7c7b\uff0c\u6839\u636e\u6587\u7ae0\u5206\u7c7b\u5217\u8868\u9009\u62e9",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "image_url",
+                        "in": "query",
+                        "description": "\u5c01\u9762\u56fe\uff0c\u6839\u636e\u56fe\u7247\u4e0a\u4f20\u7c7b\u83b7\u53d6\u5f97\u5230\u7684\u5b58\u50a8\u8def\u5f84",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort_id",
+                        "in": "query",
+                        "description": "\u6392\u5e8f",
+                        "type": "string"
+                    },
+                    {
+                        "name": "is_index",
+                        "in": "query",
+                        "description": "\u662f\u5426\u5c55\u793a",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/admin/{article_id}": {
+            "delete": {
+                "summary": "\u5220\u9664\u6587\u7ae0",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "article_id",
+                        "in": "path",
+                        "description": "\u6587\u7ae0ID",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/articleCate": {
+            "get": {
+                "summary": "\u83b7\u53d6\u5206\u7c7b\u6811\u72b6\u5217\u8868\u4fe1\u606f",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650,\u4e0d\u9700\u8981\u4f20\u53c2",
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\u8fd4\u56de\u6570\u636edata\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            },
+            "post": {
+                "summary": "\u6dfb\u52a0\u5206\u7c7b",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "\u6743\u9650\u540d,\u4e0d\u5f97\u8d85\u8fc730\u5b57\u7b26",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "parent_id",
+                        "in": "formData",
+                        "description": "\u4e0a\u7ea7\u6743\u9650ID",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "module_name",
+                        "in": "formData",
+                        "description": "\u6a21\u677f\u540d\u79f0",
+                        "type": "string"
+                    },
+                    {
+                        "name": "controller_name",
+                        "in": "formData",
+                        "description": "\u63a7\u5236\u5668\u540d\u79f0",
+                        "type": "string"
+                    },
+                    {
+                        "name": "action_name",
+                        "in": "formData",
+                        "description": "\u65b9\u6cd5\u540d",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/articleCate/{id}": {
+            "get": {
+                "summary": "\u83b7\u53d6\u5206\u7c7b\u4fe1\u606f",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u6743\u9650ID",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\u8fd4\u56de\u6570\u636edata\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            },
+            "delete": {
+                "summary": "\u5220\u9664\u6743\u9650",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u6743\u9650ID",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/articleCate/getChild": {
+            "post": {
+                "summary": "\u83b7\u53d6\u5206\u7c7b\u5b50\u96c6\u53ca\u672c\u8eab",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "description": "\u6743\u9650ID",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\u8fd4\u56de\u6570\u636edata\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/articleCate/{id}/edit": {
+            "get": {
+                "summary": "\u4fee\u6539\u6743\u9650\u4fe1\u606f",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u6743\u9650Id",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "\u6743\u9650\u540d,\u4e0d\u5f97\u8d85\u8fc730\u5b57\u7b26",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "parent_id",
+                        "in": "query",
+                        "description": "\u4e0a\u7ea7ID",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "module_name",
+                        "in": "query",
+                        "description": "\u6a21\u677f\u540d\u79f0",
+                        "type": "string"
+                    },
+                    {
+                        "name": "controller_name",
+                        "in": "query",
+                        "description": "\u63a7\u5236\u5668\u540d\u79f0",
+                        "type": "string"
+                    },
+                    {
+                        "name": "action_name",
+                        "in": "query",
+                        "description": "\u65b9\u6cd5\u540d",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
         "/platformMgmt/v1/category": {
             "get": {
                 "summary": "\u83b7\u53d6\u5206\u7c7b\u6811\u72b6\u5217\u8868\u4fe1\u606f",
@@ -497,9 +823,9 @@
                 }
             }
         },
-        "/platformMgmt/v1/delivery/{$delivery_id}/edit": {
+        "/platformMgmt/v1/delivery/{delivery_id}/edit": {
             "get": {
-                "summary": "\u6dfb\u52a0\u914d\u9001\u8ba1\u8d39\u6a21\u677f",
+                "summary": "\u4fee\u6539\u914d\u9001\u8ba1\u8d39\u6a21\u677f",
                 "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
                 "parameters": [
                     {
@@ -570,7 +896,7 @@
                 }
             }
         },
-        "/platformMgmt/v1/delivery/{$delivery_id}": {
+        "/platformMgmt/v1/delivery/{delivery_id}": {
             "delete": {
                 "summary": "\u5220\u9664\u8ba1\u8d39\u6a21\u677f",
                 "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
@@ -579,6 +905,286 @@
                         "name": "delivery_id",
                         "in": "path",
                         "description": "\u7ba1\u7406\u5458ID",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/goods": {
+            "get": {
+                "summary": "\u83b7\u53d6\u5546\u54c1\u5217\u8868\u4fe1\u606f",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650,\u4e0d\u9700\u8981\u4f20\u53c2",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "\u641c\u7d22\u9875\u6570\uff0c\u5f53\u9875\u6570\u8d85\u8fc7\u603b\u4e5f\u662f\uff0c\u8fd4\u56de\u6700\u540e\u4e00\u9875\u6570\u636e\uff0c\u4e0d\u4f20\u8f93\u9ed8\u8ba4\u7b2c\u4e00\u9875",
+                        "type": "number"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "\u641c\u7d22\u5355\u9875\u6570\uff0c\u4e0d\u4f20\u8f93\u9ed8\u8ba4\u4e00\u987520",
+                        "type": "number"
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "\u641c\u7d22\u6761\u4ef6\uff0c\u5206\u7c7bID",
+                        "type": "number"
+                    },
+                    {
+                        "name": "goods_status",
+                        "in": "query",
+                        "description": "\u641c\u7d22\u6761\u4ef6\uff0c\u5546\u54c1\u72b6\u6001\uff0c\u5982\u4e0a\u67b610\uff0c\u4e0b\u67b620",
+                        "type": "number"
+                    },
+                    {
+                        "name": "is_delete",
+                        "in": "query",
+                        "description": "\u641c\u7d22\u6761\u4ef6\uff0c\u662f\u5426\u56de\u6536\u7ad9\u5546\u54c11\u4ee3\u8868\u662f\uff0c\u9ed8\u8ba4\u4e3a0\u4e0d\u662f",
+                        "type": "number"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "description": "\u641c\u7d22\u6761\u4ef6\uff0c\u5546\u54c1\u540d\u4e2d\u5305\u542b\u5173\u952e\u5b57",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort['type']",
+                        "in": "query",
+                        "description": "\u6392\u5e8f\u6761\u4ef6\uff0cgoods\u4ee3\u8868\u5546\u54c1ID\uff0csales\u4ee3\u8868\u9500\u552e\u91cf\uff0cprice\u4ee3\u8868\u4ef7\u683c\uff0c\u4e0d\u4f20\u9012\u6709\u9ed8\u8ba4\u6392\u5e8f",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort['order']",
+                        "in": "query",
+                        "description": "\u6392\u5e8f\u65b9\u5f0f\uff0casc\u5347\u5e8f\uff0cdesc\u964d\u5e8f",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\u8fd4\u56de\u6570\u636edata\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650"
+                    }
+                }
+            },
+            "post": {
+                "summary": "\u6dfb\u52a0\u5546\u54c1",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "goods_name",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u540d\u79f0\uff0c\u4e0d\u8d85\u8fc750\u5b57\u7b26",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u5206\u7c7bID",
+                        "type": "number"
+                    },
+                    {
+                        "name": "spec_type",
+                        "in": "formData",
+                        "description": "\u89c4\u683c\u7c7b\u578b\uff0c10\u4f46\u89c4\u683c\uff0c20\u591a\u89c4\u683c",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u8be6\u60c5",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort_id",
+                        "in": "formData",
+                        "description": "\u6392\u5e8f",
+                        "type": "string"
+                    },
+                    {
+                        "name": "delivery_id",
+                        "in": "formData",
+                        "description": "\u8fd0\u8d39\u65b9\u5f0fID",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "goods_status",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u72b6\u600110\u4e0a\u67b6\uff0c20\u4e0b\u67b6",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "images[]",
+                        "in": "formData",
+                        "description": "\u5546\u54c1\u56fe\u7247\u5730\u5740\uff0c\u4e3a\u4e00\u4e2a\u4e00\u7ef4\u6570\u7ec4",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "spec[]",
+                        "in": "formData",
+                        "description": "\u5355\u89c4\u683c\u65f6\u5019\u4f7f\u7528,\u4e00\u7ef4\u6570\u7ec4\uff0c\u5305\u542bgoods_price(\u5546\u54c1\u4ef7\u683c),line_price(\u5e02\u573a\u4ef7\u683c),stock_num(\u5e93\u5b58\u91cf),goods_weight(\u5546\u54c1\u91cd\u91cf)\uff0cimage_url(\u56fe\u7247\u5730\u5740)",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "spec_many['spec_list']",
+                        "in": "formData",
+                        "description": "\u591a\u89c4\u683c\u65f6\u5019\u4f7f\u7528,\u4e8c\u7ef4\u6570\u7ec4\uff0c\u5176\u4e2d\u5305\u542b\u591a\u7ec4\u3010goods_price(\u5546\u54c1\u4ef7\u683c),line_price(\u5e02\u573a\u4ef7\u683c),stock_num(\u5e93\u5b58\u91cf),goods_weight(\u5546\u54c1\u91cd\u91cf)\uff0cspec_sku_id(id\u4ece\u5c0f\u5230\u5927\u6392\u5217\uff0c\u4e24\u4e2a\u76f4\u63a5\u7528 _ \u9694\u5f00),image_url(\u56fe\u7247\u5730\u5740)\u3011",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "spec_many['attr']",
+                        "in": "formData",
+                        "description": "\u591a\u89c4\u683c\u65f6\u5019\u4f7f\u7528,\u4e8c\u7ef4\u6570\u7ec4\uff0c\u5305\u542b\u591a\u7ec4\u3010group_id(\u4ee3\u8868\u89c4\u683c\u7684spec_id),item_id(\u4ee3\u8868spec_value_id)\u3011",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/goods/{goods_id}": {
+            "get": {
+                "summary": "\u83b7\u53d6\u6587\u7ae0\u8be6\u7ec6\u4fe1\u606f",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002\u8fd4\u56de\u5546\u54c1\u57fa\u672c\u4fe1\u606f\uff0c\u5546\u54c1\u56fe\u7247\uff0c\u5546\u54c1\u4e0e\u89c4\u683c\u5173\u7cfb\u8868---\u5229\u7528\u6b64\u6570\u636e\u6784\u5efa\u8868\u683c\uff0c\u5546\u54c1sku\u6570\u636e",
+                "parameters": [
+                    {
+                        "name": "goods_id",
+                        "in": "path",
+                        "description": "\u5546\u54c1ID",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\u8fd4\u56de\u6570\u636edata\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/goods/{goods_id}/edit": {
+            "post": {
+                "summary": "\u6dfb\u52a0\u5546\u54c1",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "\u5546\u54c1id",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "goods_name",
+                        "in": "query",
+                        "description": "\u5546\u54c1\u540d\u79f0\uff0c\u4e0d\u8d85\u8fc750\u5b57\u7b26",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "\u5546\u54c1\u5206\u7c7bID",
+                        "type": "number"
+                    },
+                    {
+                        "name": "spec_type",
+                        "in": "query",
+                        "description": "\u89c4\u683c\u7c7b\u578b\uff0c10\u4f46\u89c4\u683c\uff0c20\u591a\u89c4\u683c",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "content",
+                        "in": "query",
+                        "description": "\u5546\u54c1\u8be6\u60c5",
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort_id",
+                        "in": "query",
+                        "description": "\u6392\u5e8f",
+                        "type": "string"
+                    },
+                    {
+                        "name": "delivery_id",
+                        "in": "query",
+                        "description": "\u8fd0\u8d39\u65b9\u5f0fID",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "goods_status",
+                        "in": "query",
+                        "description": "\u5546\u54c1\u72b6\u600110\u4e0a\u67b6\uff0c20\u4e0b\u67b6",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "images[]",
+                        "in": "query",
+                        "description": "\u5546\u54c1\u56fe\u7247\u5730\u5740\uff0c\u4e3a\u4e00\u4e2a\u4e00\u7ef4\u6570\u7ec4",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "spec[]",
+                        "in": "query",
+                        "description": "\u5355\u89c4\u683c\u65f6\u5019\u4f7f\u7528,\u4e00\u7ef4\u6570\u7ec4\uff0c\u5305\u542bgoods_price(\u5546\u54c1\u4ef7\u683c),line_price(\u5e02\u573a\u4ef7\u683c),stock_num(\u5e93\u5b58\u91cf),goods_weight(\u5546\u54c1\u91cd\u91cf)\uff0cimage_url(\u56fe\u7247\u5730\u5740)",
+                        "required": "true",
+                        "type": "number"
+                    },
+                    {
+                        "name": "spec_many['spec_list']",
+                        "in": "query",
+                        "description": "\u591a\u89c4\u683c\u65f6\u5019\u4f7f\u7528,\u4e8c\u7ef4\u6570\u7ec4\uff0c\u5176\u4e2d\u5305\u542b\u591a\u7ec4\u3010goods_price(\u5546\u54c1\u4ef7\u683c),line_price(\u5e02\u573a\u4ef7\u683c),stock_num(\u5e93\u5b58\u91cf),goods_weight(\u5546\u54c1\u91cd\u91cf)\uff0cspec_sku_id(id\u4ece\u5c0f\u5230\u5927\u6392\u5217\uff0c\u4e24\u4e2a\u76f4\u63a5\u7528 _ \u9694\u5f00),image_url(\u56fe\u7247\u5730\u5740)\u3011",
+                        "required": "true",
+                        "type": "string"
+                    },
+                    {
+                        "name": "spec_many['attr']",
+                        "in": "query",
+                        "description": "\u591a\u89c4\u683c\u65f6\u5019\u4f7f\u7528,\u4e8c\u7ef4\u6570\u7ec4\uff0c\u5305\u542b\u591a\u7ec4\u3010group_id(\u4ee3\u8868\u89c4\u683c\u7684spec_id),item_id(\u4ee3\u8868spec_value_id)\u3011",
+                        "required": "true",
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "\u8fd4\u56dejson\u6570\u7ec4,\u5305\u542b\u72b6\u6001\u7801status,\u63cf\u8ff0message\uff0c\u6570\u636edata\uff0c\u4ee5\u53ca\u5934\u90e8httpCode": {
+                        "description": "\u72b6\u6001\u7801\u4e3a 1 \u65f6\u6210\u529f\uff1b\u4e3a 0 \u65f6\u5931\u8d25\u5e76\u8fd4\u56de\u63d0\u793a\u5931\u8d25\u539f\u56e0message\uff1b\u4e3a -1 \u65f6\u4e3a\u672a\u767b\u5f55\uff1b\u4e3a -2 \u65f6\u4e3a\u65e0\u6b64\u6743\u9650 "
+                    }
+                }
+            }
+        },
+        "/platformMgmt/v1/admin/{goods_id}": {
+            "delete": {
+                "summary": "\u5220\u9664\u5546\u54c1",
+                "description": "\u8bf7\u6c42\u8be5\u63a5\u53e3\u9700\u8981\u5148\u767b\u5f55\u5e76\u4e14\u6709\u6b64\u6743\u9650\u3002",
+                "parameters": [
+                    {
+                        "name": "goods_id",
+                        "in": "path",
+                        "description": "\u5546\u54c1ID",
                         "required": "true",
                         "type": "number"
                     }
@@ -956,7 +1562,7 @@
                     {
                         "name": "type_id",
                         "in": "formData",
-                        "description": "\u89c4\u683c\u7ec4\u7c7b\u578b\uff0c1\u6587\u5b50\uff0c2\u56fe\u7247",
+                        "description": "\u89c4\u683c\u7ec4\u7c7b\u578b\uff0c1\u6587\u5b57\uff0c2\u56fe\u7247",
                         "required": "true",
                         "type": "string"
                     },

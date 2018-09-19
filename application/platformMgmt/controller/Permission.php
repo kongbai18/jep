@@ -224,10 +224,10 @@ class Permission extends Base
         //判断权限下是否存在角色
         $rolePermission = model('role_permission');
 
-        $count=$rolePermission->field('count(*) as count ')->where(['per_id'=>['eq',$id]])->find()->toArray();
+        $count=$rolePermission->where(['per_id'=>['eq',$id]])->count();
 
 
-        if($count['count'] !== 0){
+        if($count > 0){
             return show(config('code.error'),'有角色包含此权限，不可删除');
         }
 
@@ -235,12 +235,12 @@ class Permission extends Base
         $permissionModel = new PermissionModel();
         //判断是否存在子集权限
         try{
-            $child=$permissionModel->field('count(*) as count ')->where(['parent_id'=>['eq',$id]])->find()->toArray();
+            $child=$permissionModel->where(['parent_id'=>['eq',$id]])->count();
         }catch (\Exception $e){
             return show(config('code.error'),'删除失败','',500);
         }
 
-        if($child['count'] !== 0){
+        if($child > 0){
             return show(config('code.error'),'删除失败,有子集权限未删除');
         }
 

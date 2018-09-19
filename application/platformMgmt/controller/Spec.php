@@ -8,7 +8,6 @@
 
 namespace app\platformmgmt\controller;
 
-use app\platformmgmt\controller\Base;
 use app\platformmgmt\model\Spec as SpecModel;
 use app\platformmgmt\model\SpecValue as SpecValueModel;
 
@@ -39,7 +38,7 @@ class Spec extends Base
      *      description="规格组名称,不得超过30字符"
      *   ),
      *   @SWG\Parameter(name="type_id",in="formData",type="string",required="true",
-     *      description="规格组类型，1文子，2图片"
+     *      description="规格组类型，1文字，2图片"
      *   ),
      *   @SWG\Parameter(name="spec_value",in="formData",type="string",required="true",
      *      description="规格值"

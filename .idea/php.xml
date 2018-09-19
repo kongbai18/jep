@@ -14,6 +14,10 @@
       <path value="$PROJECT_DIR$/vendor/zircote/swagger-php" />
       <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/qiniu/src" />
+      <path value="$PROJECT_DIR$/vendor/qiniu/docs" />
+      <path value="$PROJECT_DIR$/vendor/qiniu/tests" />
+      <path value="$PROJECT_DIR$/vendor/qiniu/examples" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.4.0" />

@@ -132,7 +132,7 @@ class Delivery extends Base
 
     /**
      *
-     * @SWG\Get(path="/platformMgmt/v1/delivery/{$delivery_id}/edit",
+     * @SWG\Get(path="/platformMgmt/v1/delivery/{delivery_id}/edit",
      *   summary="修改配送计费模板",
      *   description="请求该接口需要先登录并且有此权限。",
      *     @SWG\Parameter(name="delivery_id",in="path",type="string",required="true",
@@ -168,10 +168,10 @@ class Delivery extends Base
      *   )
      * )
      */
-    public function edit($delivery_id)
+    public function edit($id)
     {
         $data = input('get.');
-        $dat['delivery_id'] = $delivery_id;
+        $dat['delivery_id'] = $id;
 
         if (!isset($data['rule']) || empty($data['rule'])) {
             return show(config('code.error'),'请选择可配送区域');
@@ -192,7 +192,7 @@ class Delivery extends Base
 
     /**
      *
-     * @SWG\Delete(path="/platformMgmt/v1/delivery/{$delivery_id}",
+     * @SWG\Delete(path="/platformMgmt/v1/delivery/{delivery_id}",
      *   summary="删除计费模板",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="delivery_id",in="path",type="number",required="true",
@@ -203,16 +203,16 @@ class Delivery extends Base
      *  )
      * )
      */
-    public function delete($delivery_id)
+    public function delete($id)
     {
         // 判断是否存在商品
-        /*if ($goodsCount = (new Goods)->where(['delivery_id' => $delivery_id])->count()) {
+        if ($goodsCount = model('goods')->where(['delivery_id' => ['eq',$id]])->count()) {
             return show(config('error'),'该模板被' . $goodsCount . '个商品使用，不允许删除');
-        }*/
+        }
 
-        $this->deliveryModel->where(['id'=>['eq',$delivery_id]])->delete();
+        $this->deliveryModel->where(['id'=>['eq',$id]])->delete();
 
-        $this->deliveryRuleModel->where(['delivery_id'=>['eq',$delivery_id]])->delete();
+        $this->deliveryRuleModel->where(['delivery_id'=>['eq',$id]])->delete();
 
         return show(config('code.success'),'删除成功');
     }

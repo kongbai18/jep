@@ -64,7 +64,7 @@ class Admin extends Base
     public function read($id){
         $adminModel = new AdminModel();
 
-        $admin = $adminModel->get($id);
+        $admin = $adminModel->find($id);
 
         if(empty($admin)){
             return show(config('code.error'),'该管理员不存在','', 404);
@@ -167,6 +167,12 @@ class Admin extends Base
      * )
      */
     public function edit($id){
+        $admin = model('admin')->find($id);
+
+        if(empty($admin)){
+            return show(config('code.error'),'该管理员不存在','', 404);
+        }
+
         if($id == 1){
             return show(config('code.error'),'初始用户数据不可修改');
         }
@@ -283,6 +289,12 @@ class Admin extends Base
      * )
      */
     public function delete($id){
+        $admin = model('admin')->find($id);
+
+        if(empty($admin)){
+            return show(config('code.error'),'该管理员不存在','', 404);
+        }
+
         if($id == 1){
             return show(0,'初始管理员不可删除');
         }

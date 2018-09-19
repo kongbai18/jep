@@ -129,3 +129,92 @@ CREATE TABLE `jiihome_region` (
   PRIMARY KEY (`id`),
   KEY `name,level` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '地区表';
+
+DROP TABLE IF EXISTS `jiihome_goods`;
+CREATE TABLE `jiihome_goods` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品ID',
+  `goods_name` varchar(255) NOT NULL DEFAULT '' COMMENT '商品名称',
+  `category_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '对应分类ID',
+  `spec_type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '规格类型',
+  `content` longtext NOT NULL COMMENT '详情',
+  `sales_actual` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '实际销量',
+  `sort_id` int(11) unsigned NOT NULL DEFAULT '100' COMMENT '排序',
+  `delivery_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '运费模板ID',
+  `goods_status` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '商品状态',
+  `is_delete` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '商品表';
+
+DROP TABLE IF EXISTS `jiihome_goods_image`;
+CREATE TABLE `jiihome_goods_image` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品图片ID',
+  `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品Id',
+  `image_url` varchar(150) NOT NULL COMMENT '图片地址',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `goods_id`(`goods_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '商品图片表';
+
+DROP TABLE IF EXISTS `jiihome_goods_spec`;
+CREATE TABLE `jiihome_goods_spec` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品规格ID',
+  `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品ID',
+  `goods_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '商品价格',
+  `line_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '划线价格',
+  `stock_num` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '库存',
+  `goods_sales` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '售出量',
+  `goods_weight` double unsigned NOT NULL DEFAULT '0' COMMENT '商品重量',
+  `spec_sku_id` varchar(255) NOT NULL DEFAULT '' COMMENT '对应sku值ID',
+  `image_url` varchar(150) NOT NULL COMMENT '图片地址',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '商品规格库存表';
+
+DROP TABLE IF EXISTS `jiihome_goods_spec_rel`;
+CREATE TABLE `jiihome_goods_spec_rel` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品规格关系ID',
+  `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品Id',
+  `spec_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '规格ID',
+  `spec_value_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '规格值Id',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '商品规格关系表';
+
+DROP TABLE IF EXISTS `jiihome_article_cate`;
+CREATE TABLE `jiihome_article_cate` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类ID',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名',
+  `parent_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
+  `image_url` varchar(150) NOT NULL DEFAULT '' COMMENT '图片路径',
+  `sort_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `is_index` tinyint unsigned NOT NULL DEFAULT '1' COMMENT '是否展示',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '分类表';
+
+DROP TABLE IF EXISTS `jiihome_article`;
+CREATE TABLE `jiihome_article` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '文章ID',
+  `article_name` varchar(50) NOT NULL DEFAULT '' COMMENT '文章名',
+  `article_brief` varchar(150) NOT NULL DEFAULT '' COMMENT '简介',
+  `cate_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '分类ID',
+  `image_url` varchar(150) NOT NULL DEFAULT '' COMMENT '图片路径',
+  `sort_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `is_index` tinyint unsigned NOT NULL DEFAULT '1' COMMENT '是否展示',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '文章表';
+
+DROP TABLE IF EXISTS `jiihome_article_goods_rel`;
+CREATE TABLE `jiihome_article_goods_rel` (
+  `article_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '文章ID',
+  `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品ID',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  KEY `article_id`(`article_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '分类表';

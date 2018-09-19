@@ -6,6 +6,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/qiniu/docs" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/qiniu/examples" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/qiniu/src" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/qiniu/tests" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/topthink/think-captcha" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/topthink/think-helper" />

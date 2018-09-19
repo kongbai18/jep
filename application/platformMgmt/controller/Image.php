@@ -32,9 +32,9 @@ class Image extends Base
             $data = [
                 'path' => config('qiniu.image_url').'/'.$image
             ];
-            return show(config('success'),'',$data);
+            return show(config('code.success'),'',$data);
         }else {
-            return show(config('error'),'图片上传失败','',500);
+            return show(config('code.error'),'图片上传失败','',500);
         }
     }
 }
