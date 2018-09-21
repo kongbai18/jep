@@ -23,7 +23,6 @@ class Login extends Base
 
     }
 
-
     /**
      *
      * @SWG\Get(path="/platformMgmt/v1/login",
