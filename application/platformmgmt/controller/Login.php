@@ -25,7 +25,7 @@ class Login extends Base
 
     /**
      *
-     * @SWG\Get(path="/platformMgmt/v1/login",
+     * @SWG\Post(path="/platformMgmt/v1/login",
      *   summary="后台登陆",
      *   description="后台系统登陆功能，返回二级权限列表",
      *     @SWG\Parameter(name="username",in="query",type="string",required="true",
@@ -80,7 +80,7 @@ class Login extends Base
         // 1 更新数据库 登录时间 登录ip
         $udata = [
             'last_login_time' => time(),
-            'last_login_ip' => ipton(request()->ip()),
+            'last_login_ip' => request()->ip(),
         ];
 
         try {
@@ -98,10 +98,51 @@ class Login extends Base
         ];
 
         // 3 session
-        session(config('admin.session_user'), $user);
+        session(config('admin.session_user'), $user,config('admin.session_user_scope'));
 
         return show(config('code.success'),'登录成功',$data);
 
+    }
+
+    /**
+     *
+     * @SWG\Get(path="/platformMgmt/v1/getAdminData",
+     *   summary="判断是否登陆",
+     *   description="登陆返回登陆ID",
+     *   @SWG\Response(response="返回json数组,包含状态码status,描述message，数据data，以及头部httpCode",
+     *      description="状态码为 1 时成功；为 0 时失败并返回提示失败原因message； "
+     *  )
+     * )
+     */
+    public function getAdminData(){
+        $user = session(config('admin.session_user'));
+        if($user){
+            $data['id'] = $user['id'];
+            $data['avatar'] = 'default.jpg';
+            return show(config('code.success'),'获取管理员信息成功',$data);
+        }
+        return show(config('code.error'),'获取失败');
+    }
+
+    /**
+     *
+     * @SWG\Get(path="/platformMgmt/v1/getMenu",
+     *   summary="获取登陆着权限菜单",
+     *   description="获取登陆着权限菜单",
+     *   @SWG\Response(response="返回json数组,包含状态码status,描述message，数据data，以及头部httpCode",
+     *      description="状态码为 1 时成功；为 0 时失败并返回提示失败原因message； "
+     *  )
+     * )
+     */
+    public function getMenu(){
+        $user = session(config('admin.session_user'));
+        $permissionMode = new PermissionModel();
+        $btnData = $permissionMode->getBtns($user->id);
+
+        $data = [
+            'btnData' => $btnData
+        ];
+        return show(config('code.success'),'获取菜单成功',$data);
     }
 
     /**
@@ -115,7 +156,7 @@ class Login extends Base
      * )
      */
     public function logout() {
-        session(null);
+        session(null,config('admin.session_user_scope'));
         // 跳转
         return show(config('code.success'),'退出成功');
     }

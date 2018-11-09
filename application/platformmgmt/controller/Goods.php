@@ -52,7 +52,7 @@ class Goods extends Base
 
         $rdata = $goodsModel->getGoodsData($data);
 
-        return show(config('code.success'),'获取文章信息成功',$rdata);
+        return show(config('code.success'),'获取商品列表成功',$rdata);
     }
 
 
@@ -121,7 +121,7 @@ class Goods extends Base
      *   )
      * )
      */
-    public function add()
+    public function save()
     {
         $data = input('post.');
 
@@ -184,15 +184,14 @@ class Goods extends Base
      *   )
      * )
      */
-    public function edit($id)
+    public function edit()
     {
-        $data = input('get.');
+        $data = input('post.');
 
         if (!isset($data['images']) || empty($data['images'])) {
             return show(config('code.error'),'请上传商品图片');
         }
 
-        $data['goods_id'] = $id;
 
         $goodsModel = new GoodsModel();
         if($goodsModel->editGoods($data)){
@@ -225,7 +224,7 @@ class Goods extends Base
         ];
 
         try{
-            $goodsModel->save($udata);
+            $goodsModel->update($udata);
         }catch (\Exception $e){
             return show(config('code.error'),'删除失败');
         }

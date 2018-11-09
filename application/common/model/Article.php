@@ -35,7 +35,7 @@ class Article extends Base
         $total = $this->getArticleCount($whereData);
         $this->getPageAndSize($data);
         $pageTotal = ceil($total/$this->size);
-        if($data['page'] > $pageTotal){
+        if(isset($data['page']) && $data['page'] > $pageTotal){
             $this->page = $pageTotal;
         }
 
@@ -46,6 +46,7 @@ class Article extends Base
             'total' => $total,
             'page_total' => $pageTotal,
             'page_num' => $this->page,
+            'page_size' => $this->size,
         ];
 
         $data = [
@@ -91,8 +92,15 @@ class Article extends Base
     public function getArticleDetail($article_id){
         $article = $this->find($article_id);
 
-        $goodsId = model('article_goods_rel')->where(['article+id'=>['eq',$article_id]])->select()->toArray();
+        $goodsId = model('article_goods_rel')->where(['article_id'=>['eq',$article_id]])->select()->toArray();
 
-        $goodsData = model('goods')->getGoodsDataById($goodsId);
+        //$goodsData = model('goods')->getGoodsDataById($goodsId);
+
+        $data = [
+            'article' => $article,
+            'goods' => $goodsId,
+        ];
+
+        return $data;
     }
 }

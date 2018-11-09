@@ -6,5 +6,5 @@
  * Time: 9:43
  */
 return [
-    'list_rows' => 20,
+    'list_rows' => 15,
 ];

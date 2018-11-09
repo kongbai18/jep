@@ -78,7 +78,7 @@ class Spec extends Base
                 'spec_value_id' => (int)$specValueId,
             ];
 
-            return show(config('success'),'',$rdata);
+            return show(config('code.success'),'',$rdata);
         }
         // 判断规格值是否存在
         if ($specValueId = $this->SpecValueModel->getSpecValueIdByName($specId,$data['spec_value_alt'])) {

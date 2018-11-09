@@ -8,6 +8,7 @@
 
 namespace app\common\lib\storage;
 
+vendor('qiniu.autoload');
 use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
 

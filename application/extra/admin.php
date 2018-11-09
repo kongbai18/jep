@@ -8,4 +8,5 @@
 return [
     'password_key' => '_#sing_ty',
     'session_user' => 'adminuser',
+    'session_user_scope' => 'jep',
 ];

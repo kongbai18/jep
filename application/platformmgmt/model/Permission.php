@@ -26,7 +26,7 @@ class Permission extends PermissionModel
         !empty($search) && $filter['name'] = ['like', '%' . trim($search) . '%'];
 
         // 排序规则
-        $sort = ['sort_id' => 'asc'];
+        $sort = ['id','sort_id' => 'asc'];
 
         // 执行查询
         $list = $this
@@ -70,10 +70,19 @@ class Permission extends PermissionModel
      */
     public function getChild($id){
         //获得所有分类数据
-        $data = $this->select()->toArray();
+        $data = $this->getList();
         $child = $this->_getChild($id,$data,true);
         $child[] = $id;
-        return $child;
+        $rdata = $data;
+        foreach ($data as $k => $v){
+            foreach ($child as $item){
+                if($v['id'] == $item){
+                    unset($rdata[$k]);
+
+                }
+            }
+        }
+        return $rdata;
     }
     private function _getChild($id,$data,$isClear = FALSE){
         static $child = array();
@@ -96,7 +105,7 @@ class Permission extends PermissionModel
      * @throws \think\exception\DbException
      */
     public function _getThree(){
-        $data = $this->order(['sort_id' => 'asc'])->select()->toArray();
+        $data = $this->order(['id','sort_id' => 'asc'])->select()->toArray();
 
         $ret = array();
         foreach ($data as $k => &$v) {
@@ -130,17 +139,18 @@ class Permission extends PermissionModel
         $roleData = model('admin_role')->field('group_concat(role_id) as role_id')->where(['admin_id'=>['eq',$adminId]])->group('admin_id')->find()->toArray();
         $roleData = explode(',',$roleData['role_id']);
 
+
         if(in_array('1',$roleData)){
-            $permissionData = $this->field('id,name,parent_id')->order('sort_id asc')->select()->toArray();
+            $permissionData = $this->order('sort_id asc')->select()->toArray();
         }else{
             //取出当前角色权限
             $adminRoleModel = model('admin_role');
             $permissionData = $adminRoleModel->alias('a')
-                ->field('c.id,c.name,c.parent_id')
+                ->field('c.*')
                 ->join('role_permission b','a.role_id = b.role_id','left')
                 ->join('permission c','b.per_id = c.id','left')
                 ->where(['a.admin_id'=>['eq',$adminId]])
-                ->order('c.sort_id asc')
+                ->order(['c.id','c.sort_id' => 'asc'])
                 ->group('c.id')
                 ->select()
                 ->toArray();
@@ -148,7 +158,7 @@ class Permission extends PermissionModel
 
         $btns =  array();
         foreach($permissionData as $k => $v){
-            if($v['parent_id'] === 0){
+            if($v['parent_id'] == 0){
                 //找子集
                 foreach($permissionData as $k1 => $v1){
                     if($v1['parent_id'] == $v['id']){
@@ -168,9 +178,9 @@ class Permission extends PermissionModel
      */
     public function chkPri(){
         //获取要访问的模型，控制器，方法
-        $admin = session(config('admin.session_user'));
+        $admin = session(config('admin.session_user'), '', config('admin.session_user_scope'));
 
-        $roleData = model('admin_role')->field('group_concat(role_id) as role_id')->where(['admin_id'=>['eq',$admin['id']]])->group('admin_id')->find()->toArray();
+        $roleData = model('admin_role')->field('group_concat(role_id) as role_id')->where(['admin_id'=>['eq',$admin['id']]])->group('admin_id')->find();
         $roleData = explode(',',$roleData['role_id']);
 
         //如果是超级管理员直接pass

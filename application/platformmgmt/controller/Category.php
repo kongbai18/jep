@@ -30,10 +30,10 @@ class Category extends Base
         $categoryList = $categoryModel->getList();
 
         $data =  [
-            'permissionData' => $categoryList
+            'categoryData' => $categoryList
         ];
 
-        return show(config('code.success'), '获取权限列表成功', $data);
+        return show(config('code.success'), '获取分类列表成功', $data);
     }
 
     /**
@@ -60,10 +60,10 @@ class Category extends Base
         }
 
         $data =  [
-            'permissionData' => $categoryData
+            'categoryData' => $categoryData
         ];
 
-        return show(config('code.success'), '获取权限信息成功', $data);
+        return show(config('code.success'), '获取分类信息成功', $data);
 
     }
 

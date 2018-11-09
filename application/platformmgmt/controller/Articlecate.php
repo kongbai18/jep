@@ -9,7 +9,7 @@
 namespace app\platformmgmt\controller;
 
 use app\platformmgmt\model\ArticleCate as ArticleCateModel;
-class ArticleCate extends Base
+class Articlecate extends Base
 {
     /**
      *
@@ -29,7 +29,7 @@ class ArticleCate extends Base
         $articleCateList = $articleCateModel->getList();
 
         $data =  [
-            'permissionData' => $articleCateList
+            'categoryData' => $articleCateList
         ];
 
         return show(config('code.success'), '获取文章分类列表成功', $data);
@@ -59,7 +59,7 @@ class ArticleCate extends Base
         }
 
         $data =  [
-            'permissionData' => $articleCateData
+            'categoryData' => $articleCateData
         ];
 
         return show(config('code.success'), '获取文章分类信息成功', $data);

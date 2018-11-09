@@ -8,7 +8,7 @@
 
 namespace app\platformmgmt\model;
 
-use thinl\Db;
+use think\Db;
 use app\common\model\Article as ArticleModel;
 use app\platformmgmt\model\ArticleGoodsRel as ArticleGoodsRelModel;
 
@@ -62,8 +62,8 @@ class Article extends ArticleModel
         $articleGoodsRelModel = new ArticleGoodsRelModel();
         $isUpdate && $articleGoodsRelModel->removeAll($articleId);
 
-        if (isset($data['images']) && !empty($data['images'])) {
-            $udata = [];
+        if (isset($goodsData) && !empty($goodsData)) {
+               $udata = [];
             foreach ($goodsData as $v){
                 $udata[] = [
                   'article_id' => $articleId,
@@ -75,12 +75,13 @@ class Article extends ArticleModel
     }
 
     public function remove($article_id){
+        $article_id = int($article_id);
         $articleGoodsRelModel = new ArticleGoodsRelModel();
         // 开启事务
         Db::startTrans();
         try {
             // 删除文章
-            $this->delete($article_id);
+            $this->where(['id'=>['eq',$article_id]])->delete();
             // 删除关联商品
             $articleGoodsRelModel->removeAll($article_id);
             Db::commit();

@@ -36,7 +36,6 @@ class Role extends RoleModel
                 $result = $rolePerModel->insert(['role_id'=>$id,'per_id'=>$v]);
                 if(!$result){
                     Db::rollback();
-                    halt($e->getMessage());
                     return false;
                 }
             }
@@ -73,10 +72,10 @@ class Role extends RoleModel
                 return false;
             }
             //权限关联表入库
+            $data['per_id'] = explode(',',$data['per_id']);
             foreach ($data['per_id'] as $k => $v){
-                try{
-                    $rolePerModel->insert(['role_id'=>$data['id'],'per_id'=>$v]);
-                }catch (\Exception $e){
+                $result = $rolePerModel->insert(['role_id'=>$data['id'],'per_id'=>$v]);
+                if(!$result){
                     Db::rollback();
                     return false;
                 }
@@ -146,12 +145,13 @@ class Role extends RoleModel
      */
     public function getRolePer($id){
 
-        $list = $this->field('a.*,b.per_id')
-            ->alias('a')
-            ->join('role_permission b','a.id = b.role_id','left')
-            ->where(['a.id'=>['eq',$id]])
-            ->find()
-            ->toArray();
+        $list = $this->find($id);
+        $per = model('role_permission')->field('per_id')->where(['role_id'=>['eq',$id]])->select()->toArray();
+        $perList = [];
+        foreach ($per as $v){
+            $perList[] = $v['per_id'];
+        }
+        $list['per_id'] = $perList;
         return $list;
     }
 

@@ -22,8 +22,14 @@ class GoodsSpec extends GoodsSpecModel
     {
         $data = [];
         foreach ($spec_list as $item) {
+            $spec_sku_id = [];
+            foreach ($item['sku'] as $v){
+               $spec_sku_id[] = $v['spec_value_id'];
+            }
+            sort($spec_sku_id,SORT_NUMERIC);
+            $spec_sku_id = (string)implode('_',$spec_sku_id);
             $data[] = array_merge($item['form'], [
-                'spec_sku_id' => $item['spec_sku_id'],
+                'spec_sku_id' => $spec_sku_id,
                 'goods_id' => $goods_id,
             ]);
         }
@@ -62,6 +68,6 @@ class GoodsSpec extends GoodsSpecModel
     {
         $model = new GoodsSpecRel;
         $model->where('goods_id','=', $goods_id)->delete();
-        return $this->where('goods_id','=', $goods_id)->delete();
+        $this->where('goods_id','=', $goods_id)->delete();
     }
 }

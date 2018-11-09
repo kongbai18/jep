@@ -66,7 +66,6 @@ class Admin extends AdminModel
             $result = $this->edit($data);
         }catch (\Exception $e) {
             Db::rollback();
-            halt($e->getMessage());
             return false;
         }
 
@@ -81,7 +80,7 @@ class Admin extends AdminModel
                 return false;
             }
             //权限关联表入库
-
+            $data['role_id'] = explode(',',$data['role_id']);
             foreach ($data['role_id'] as $k => $v){
                 try{
                     $adminRoleModel->insert(['role_id'=>$v,'admin_id'=>$data['id']]);
@@ -135,12 +134,13 @@ class Admin extends AdminModel
      * @throws \think\exception\DbException
      */
     public function getAdminRole($id){
-        $list = $this->field('a.*,b.role_id')
-            ->alias('a')
-            ->join('admin_role b','a.id = b.admin_id','left')
-            ->where(['a.id'=>['eq',$id]])
-            ->find()
-            ->toArray();
+        $list = $this->find($id);
+        $per = model('admin_role')->field('role_id')->where(['admin_id'=>['eq',$id]])->select()->toArray();
+        $adminList = [];
+        foreach ($per as $v){
+            $adminList[] = $v['role_id'];
+        }
+        $list['role_id'] = $adminList;
         return $list;
     }
 

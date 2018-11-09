@@ -69,10 +69,19 @@ class ArticleCate extends Base
      */
     public function getChild($id){
         //获得所有分类数据
-        $data = $this->select()->toArray();
+        $data = $this->getList();
         $child = $this->_getChild($id,$data,true);
         $child[] = $id;
-        return $child;
+        $rdata = $data;
+        foreach ($data as $k => $v){
+            foreach ($child as $item){
+                if($v['id'] == $item){
+                    unset($rdata[$k]);
+
+                }
+            }
+        }
+        return $rdata;
     }
 
     private function _getChild($id,$data,$isClear = FALSE){

@@ -14,7 +14,7 @@ class Image extends Base
 {
     /**
      *
-     * @SWG\Post(path="/platformMgmt/v1/upload",
+     * @SWG\Get(path="/platformMgmt/v1/upload",
      *   summary="获取上传图片路径",
      *   description="请求该接口需要先登录并且有此权限,上传file",
      *   @SWG\Response(response="返回json数组,包含状态码status,描述message，数据data，以及头部httpCode",

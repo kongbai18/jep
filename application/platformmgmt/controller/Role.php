@@ -63,7 +63,7 @@ class Role extends Base
         }
 
         //获取数据
-        $roleData = $roleModel->getRolePer($id);
+        $roleData = $roleModel->getRolePer($id)->toArray();
 
         $data = [
             'roleData' => $roleData
@@ -183,7 +183,7 @@ class Role extends Base
         $count=$adminRoleModel->field('count(*) as count ')->where(['role_id'=>['eq',$id]])->find()->toArray();
 
 
-        if($count['count'] !== 0){
+        if($count['count'] != 0){
             return show(config('code.error'),'该角色下存在管理员，不可删除');
         }
 

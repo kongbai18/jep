@@ -57,6 +57,7 @@ class Goods extends Base
             'total' => $total,
             'page_total' => $pageTotal,
             'page_num' => $this->page,
+            'page_size' => $this->size,
         ];
 
         $data = [
@@ -111,6 +112,7 @@ class Goods extends Base
             ->join('category c','a.category_id = c.id','left')
             ->where($whereData)
             ->order($sortData)
+            ->limit($from,$size)
             ->group('a.id')
             ->select()
             ->toArray();

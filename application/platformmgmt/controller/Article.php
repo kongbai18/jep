@@ -28,7 +28,7 @@ class Article extends Base
 
        $rdata = $articleModel->getArticleData($data);
 
-       return show(config('code.success'),'获取文章信息成功',$rdata);
+       return show(config('code.success'),'获取文章列表成功',$rdata);
     }
 
     /**
@@ -92,7 +92,7 @@ class Article extends Base
         $data = input('post.');
 
         // validate
-        $validate = validate('Admin');
+        $validate = validate('Article');
         if(!$validate->check($data)) {
             return show(config('code.error'), $validate->getError());
         }
@@ -108,7 +108,7 @@ class Article extends Base
 
     /**
      *
-     * @SWG\Get(path="/platformMgmt/v1/admin/{article_id}/article",
+     * @SWG\Post(path="/platformMgmt/v1/admin/article",
      *   summary="修改文章",
      *   description="请求该接口需要先登录并且有此权限。",
      *   @SWG\Parameter(name="article_id",in="path",type="string",required="true",
@@ -138,18 +138,19 @@ class Article extends Base
      *   )
      * )
      */
-    public function edit($id){
+    public function edit(){
+        $data = input('post.');
+        $id = $data['id'];
         $article = model('article')->find($id);
 
         if(empty($article)){
             return show(config('code.error'),'该文章不存在','', 404);
         }
 
-        $data = input('get.');
-        $data['id'] = $id;
+
 
         // validate
-        $validate = validate('Admin');
+        $validate = validate('Article');
         if(!$validate->check($data)) {
             return show(config('code.error'), $validate->getError());
         }
@@ -175,7 +176,7 @@ class Article extends Base
      *  )
      * )
      */
-    public function delete($article_id){
+    public function delete($id){
         $article = model('article')->find($id);
 
         if(empty($article)){
@@ -184,7 +185,7 @@ class Article extends Base
 
         $articleModel = new ArticleModel();
 
-        if($articleModel->remove($article_id)){
+        if($articleModel->remove($id)){
             return show(config('code.success'),'删除成功');
         }
 

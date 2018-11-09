@@ -23,7 +23,7 @@ class Test
 
         if(in_array($origin, $allow_origin)) {
             header('Access-Control-Allow-Origin:' . $origin);
-            header('Access-Control-Allow-Methods:POST, GET,PUT, DELETE');
+            header('Access-Control-Allow-Methods:POST,GET,PUT,DELETE,OPTIONS');
             header('Access-Control-Allow-Headers:Accept,Referer,Host,Keep-Alive,User-Agent,X-Requested-With,Cache-Control,Content-Type,Cookie,token');
             header('Access-Control-Allow-Credentials:true');
 

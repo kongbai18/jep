@@ -9,6 +9,7 @@
 namespace app\platformmgmt\model;
 
 use app\common\model\Goods as GoodsModel;
+use app\common\model\GoodsImage as GoodsImageModel;
 use think\Db;
 
 class Goods extends GoodsModel
@@ -66,16 +67,19 @@ class Goods extends GoodsModel
      */
     private function addGoodsImages($images,$goodsId)
     {
-        $goodsImgModel = new GoodsImg;
+        $goodsImgModel = new GoodsImageModel;
         $goodsImgModel->where(['goods_id'=>['eq',$goodsId]])->delete();
         $udata = [];
         foreach ($images as $v){
             $udata[] = [
                 'goods_id' => $goodsId,
-                'img_url' => $v['img_url']
+                'image_url' => $v['img_url']
             ];
         }
-        return $goodsImgModel->saveAll($udata);
+
+        $goodsImgModel->saveAll($udata);
+
+
     }
 
 
@@ -93,12 +97,19 @@ class Goods extends GoodsModel
         // 添加规格数据
         if ($data['spec_type'] === '10') {
             // 单规格
-            $goodsSpecModel->allowField(true)->save($data['spec']);
+            $data['spec']['goods_id'] = $goodsId;
+            try{
+                $goodsSpecModel->allowField(true)->save($data['spec']);
+            }catch (\Exception $e){
+                var_dump($e->getMessage());
+            }
+
         } else if ($data['spec_type'] === '20') {
-            // 添加商品与规格关系记录
-            $goodsSpecModel->addGoodsSpecRel($goodsId, $data['spec_many']['spec_attr']);
-            // 添加商品sku
-            $goodsSpecModel->addSkuList($goodsId, $data['spec_many']['spec_list']);
+                // 添加商品与规格关系记录
+                $goodsSpecModel->addGoodsSpecRel($goodsId, $data['spec_many']['spec_attr']);
+                // 添加商品sku
+                $goodsSpecModel->addSkuList($goodsId, $data['spec_many']['spec_list']);
+
         }
     }
 

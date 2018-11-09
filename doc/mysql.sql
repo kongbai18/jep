@@ -5,11 +5,11 @@ CREATE TABLE `jiihome_admin` (
   `password` char(32) NOT NULL COMMENT '密码',
   `phone` varchar(30) NOT NULL default '' COMMENT '手机号',
   `email` varchar(30) NOT NULL default '' COMMENT '邮箱',
-  `status` tinyint unsigned not null default 0 comment '是否启用',
-  `last_login_ip` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_login_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `create_time` int(11) unsigned NOT NULL DEFAULT '0',
-  `update_time` int(11) unsigned NOT NULL DEFAULT '0',
+  `status` tinyint unsigned not null default 1 comment '是否启用',
+  `last_login_ip` varchar(30) NOT NULL default '' COMMENT '最后登陆Ip',
+  `last_login_time` int(12) unsigned NOT NULL DEFAULT '0' COMMENT '最后登陆时间',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员';
 
@@ -66,6 +66,19 @@ CREATE TABLE `jiihome_category` (
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '分类表';
+
+DROP TABLE IF EXISTS `jiihome_brand`;
+CREATE TABLE `jiihome_brand` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '品牌ID',
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '品牌名',
+  `web_url` varchar(150) NOT NULL DEFAULT '' COMMENT '品牌官网',
+  `image_url` varchar(150) NOT NULL DEFAULT '' COMMENT '图片logo',
+  `sort_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `is_index` tinyint unsigned NOT NULL DEFAULT '1' COMMENT '是否展示',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '品牌表';
 
 DROP TABLE IF EXISTS `jiihome_spec`;
 CREATE TABLE `jiihome_spec` (
@@ -135,6 +148,7 @@ CREATE TABLE `jiihome_goods` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品ID',
   `goods_name` varchar(255) NOT NULL DEFAULT '' COMMENT '商品名称',
   `category_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '对应分类ID',
+  `brand_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '对应品牌ID',
   `spec_type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '规格类型',
   `content` longtext NOT NULL COMMENT '详情',
   `sales_actual` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '实际销量',
@@ -145,7 +159,8 @@ CREATE TABLE `jiihome_goods` (
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  KEY `category_id` (`category_id`)
+  KEY `category_id` (`category_id`),
+  KEY `brand_id` (`brand_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '商品表';
 
 DROP TABLE IF EXISTS `jiihome_goods_image`;
@@ -160,18 +175,16 @@ CREATE TABLE `jiihome_goods_image` (
 
 DROP TABLE IF EXISTS `jiihome_goods_spec`;
 CREATE TABLE `jiihome_goods_spec` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '商品规格ID',
   `goods_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '商品ID',
   `goods_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '商品价格',
   `line_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '划线价格',
   `stock_num` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '库存',
-  `goods_sales` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '售出量',
   `goods_weight` double unsigned NOT NULL DEFAULT '0' COMMENT '商品重量',
-  `spec_sku_id` varchar(255) NOT NULL DEFAULT '' COMMENT '对应sku值ID',
-  `image_url` varchar(150) NOT NULL COMMENT '图片地址',
+  `spec_sku_id` varchar(255) NOT NULL DEFAULT '0' COMMENT '对应sku值ID',
+  `image_url` varchar(150) NOT NULL default '' COMMENT '图片地址',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`id`)
+  KEY `goods_id`(`goods_id`,`spec_sku_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '商品规格库存表';
 
 DROP TABLE IF EXISTS `jiihome_goods_spec_rel`;
@@ -189,7 +202,6 @@ CREATE TABLE `jiihome_article_cate` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类ID',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名',
   `parent_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级ID',
-  `image_url` varchar(150) NOT NULL DEFAULT '' COMMENT '图片路径',
   `sort_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `is_index` tinyint unsigned NOT NULL DEFAULT '1' COMMENT '是否展示',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -203,7 +215,8 @@ CREATE TABLE `jiihome_article` (
   `article_name` varchar(50) NOT NULL DEFAULT '' COMMENT '文章名',
   `article_brief` varchar(150) NOT NULL DEFAULT '' COMMENT '简介',
   `cate_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '分类ID',
-  `image_url` varchar(150) NOT NULL DEFAULT '' COMMENT '图片路径',
+  `image_url` varchar(150) NOT NULL DEFAULT '' COMMENT '封面图片路径',
+  `content` longtext NOT NULL COMMENT '详情',
   `sort_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
   `is_index` tinyint unsigned NOT NULL DEFAULT '1' COMMENT '是否展示',
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -218,3 +231,232 @@ CREATE TABLE `jiihome_article_goods_rel` (
   `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   KEY `article_id`(`article_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '分类表';
+
+DROP TABLE IF EXISTS `jiihome_furniture`;
+CREATE TABLE `jiihome_furniture` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `fur_name` varchar(30) NOT NULL  COMMENT '家具名称',
+  `image_url` varchar(150) NOT NULL DEFAULT '' COMMENT '封面图',
+  `cate_id` tinyint(4) UNSIGNED NOT NULL COMMENT '分类ID；1柜体，2门，3饰面',
+  `attr_type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '属性类型：1但规格，2多规格',
+  `sort_id` int(10) UNSIGNED NOT NULL DEFAULT '100' COMMENT '排序',
+  `is_index` tinyint UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否显示',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+   PRIMARY KEY (`id`),
+   KEY `cate_id` (`cate_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='家具表';
+
+
+DROP TABLE IF EXISTS `jiihome_attr`;
+CREATE TABLE `jiihome_attr` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '规格组ID',
+  `attr_name` varchar(255) NOT NULL DEFAULT '' COMMENT '规格组名称',
+  `type_id` tinyint NOT NULL DEFAULT '1' COMMENT '规格组类型，1选择，2增减',
+  `create_time` int(11) NOT NULL default '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `attr_name,type_id`(`attr_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '规格组';
+
+DROP TABLE IF EXISTS `jiihome_attr_value`;
+CREATE TABLE `jiihome_attr_value` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '规格值ID',
+  `attr_value` varchar(255) NOT NULL default '' COMMENT '规格值',
+  `attr_id` int(11) NOT NULL COMMENT '规格ID',
+  `create_time` int(11) NOT NULL default '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `attr_id`(`attr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '规格值';
+
+DROP TABLE IF EXISTS `jiihome_furniture_attr`;
+CREATE TABLE `jiihome_furniture_attr` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '家具规格ID',
+  `fur_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '家具ID',
+  `model_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '模型ID',
+  `attr_sku_id` varchar(255) NOT NULL DEFAULT '' COMMENT '对应sku值ID',
+  `image_url` varchar(150) NOT NULL COMMENT '图片地址',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `fur_id,attr_sku_id`(`fur_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '家具规格模型对应表';
+
+DROP TABLE IF EXISTS `jiihome_furniture_attr_rel`;
+CREATE TABLE `jiihome_furniture_attr_rel` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '家具规格关系ID',
+  `fur_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '家具Id',
+  `attr_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '规格ID',
+  `attr_value_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '规格值Id',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '家具规格关系表';
+
+DROP TABLE IF EXISTS `jiihome_model`;
+CREATE TABLE `jiihome_model` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '模型ID',
+  `model_name` varchar(255) NOT NULL DEFAULT '' COMMENT '模型名称',
+  `project_area` varchar(255) NOT NULL DEFAULT '' COMMENT '投影面积公式',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '计算模型表';
+
+DROP TABLE IF EXISTS `jiihome_model_material`;
+CREATE TABLE `jiihome_model_material` (
+  `model_id` int(11) unsigned NOT NULL COMMENT '模型ID',
+  `material_para` varchar(50) NOT NULL DEFAULT '' COMMENT '材料参数',
+  `material_goods` varchar(300) NOT NULL DEFAULT '' COMMENT '材料商品ID数组',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  KEY `model_id`(`model_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '模型对应材料表';
+
+DROP TABLE IF EXISTS `jiihome_model_parameter`;
+CREATE TABLE `jiihome_model_parameter` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '参数ID',
+  `model_id` int(11) unsigned NOT NULL COMMENT '模型ID',
+  `parameter` varchar(50) NOT NULL DEFAULT '' COMMENT '参数',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `model_id`(`model_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '模型对应参数表';
+
+DROP TABLE IF EXISTS `jiihome_model_formula`;
+CREATE TABLE `jiihome_model_formula` (
+  `model_id` int(11) unsigned NOT NULL COMMENT '模型ID',
+  `formula_name` varchar(50) NOT NULL DEFAULT '' COMMENT '公式名称',
+  `number` varchar(300) NOT NULL DEFAULT '' COMMENT '数量计算',
+  `price` varchar(300) NOT NULL DEFAULT '' COMMENT '单价计算',
+  `total_price` varchar(300) NOT NULL DEFAULT '' COMMENT '总价计算',
+  `unit` varchar(50) NOT NULL DEFAULT '' COMMENT '计量单位',
+  `remark` varchar(150) NOT NULL DEFAULT '' COMMENT '备注',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  KEY `model_id`(`model_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '模型对应材料表';
+
+DROP TABLE IF EXISTS `jiihome_model_ext`;
+CREATE TABLE `jiihome_model_ext` (
+  `model_id` int(11) unsigned NOT NULL COMMENT '模型ID',
+  `type_id` int(11) unsigned NOT NULL COMMENT '类型ID：1单选；2多选；3输入框',
+  `ext_name` varchar(50) NOT NULL DEFAULT '' COMMENT '扩展名',
+  `ext_para` varchar(150) NOT NULL DEFAULT '' COMMENT '扩展参数',
+  `ext_val` varchar(150) NOT NULL DEFAULT '' COMMENT '扩展值',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  KEY `model_id`(`model_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '模型对应材料表';
+
+
+DROP TABLE IF EXISTS `jiihome_offer`;
+CREATE TABLE `jiihome_offer` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '报价ID',
+  `role_id` int(11) unsigned NOT NULL COMMENT '10代表管理员；20代表用户',
+  `user_id` int(11) unsigned NOT NULL COMMENT '用户或管理员ID',
+  `fur_attr_id` int(11) unsigned NOT NULL COMMENT '家具属性ID',
+  `space` varchar(50) NOT NULL DEFAULT '' COMMENT '家具所在地址',
+  `material` varchar(500) NOT NULL DEFAULT '' COMMENT '材料',
+  `parameter` varchar(500) NOT NULL DEFAULT '' COMMENT '参数',
+  `ext` varchar(500) NOT NULL DEFAULT '' COMMENT '扩展值',
+  `is_delete` tinyint NOT NULL DEFAULT 0 COMMENT '是否删除，1删除，0正常',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `role_id,user_id,is_delete`(`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '报价表';
+
+
+drop table if exists `jiihome_user`;
+CREATE TABLE `jiihome_user` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `username` varchar(30) NOT NULL UNIQUE COMMENT '用户名',
+  `password` char(32) NOT NULL COMMENT '密码',
+  `phone` varchar(30) NOT NULL UNIQUE default '' COMMENT '手机号',
+  `email` varchar(30) NOT NULL default '' COMMENT '邮箱',
+  `image_url` varchar(150) NOT NULL COMMENT '头像地址',
+  `last_login_ip` varchar(30) NOT NULL default '' COMMENT '最后登陆Ip',
+  `last_login_time` int(12) unsigned NOT NULL DEFAULT '0' COMMENT '最后登陆时间',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';
+
+drop table if exists `jiihome_cart`;
+CREATE TABLE `jiihome_cart` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `user_id` int UNSIGNED NOT NULL COMMENT '用户Id',
+  `product_type` tinyint UNSIGNED NOT NULL COMMENT '商品类型；1商品，2.定制',
+  `product_id` int UNSIGNED NOT NULL COMMENT '商品Id',
+  `spec_sku_id` varchar(30) NOT NULL COMMENT '商品sku',
+  `goods_name` varchar(30) NOT NULL COMMENT '商品名',
+  `image_url` varchar(150) NOT NULL COMMENT '商品图',
+  `goods_attr` varchar(150) NOT NULL COMMENT '所选商品属性',
+  `goods_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '商品价格',
+  `goods_num` int UNSIGNED NOT NULL COMMENT '商品数量',
+  `is_delete` tinyint NOT NULL DEFAULT 0 COMMENT '是否删除，1删除，0正常',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  KEY `user_id`(`user_id`,`is_delete`,`product_type`,`product_id`,`spec_sku_id`),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='购物车';
+
+drop table if exists `jiihome_address`;
+CREATE TABLE `jiihome_address` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `user_id` int UNSIGNED NOT NULL COMMENT '用户Id',
+  `sccept_name` varchar(30) NOT NULL COMMENT '收货人姓名',
+  `telphone` varchar(30) NOT NULL COMMENT '手机号',
+  `area_id` int UNSIGNED NOT NULL COMMENT '地区Id',
+  `area_name` varchar(50) NOT NULL COMMENT '地区长名称',
+  `address` varchar(50) NOT NULL COMMENT '详细地址',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  KEY `user_id`(`user_id`),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='收货地址';
+
+drop table if exists `jiihome_order`;
+CREATE TABLE `jiihome_order` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `order_no` varchar(30) NOT NULL COMMENT '订单编号',
+  `parent_no` varchar(30) NOT NULL COMMENT '上级订单号',
+  `user_id` int UNSIGNED NOT NULL COMMENT '用户Id',
+  `total_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '总价格',
+  `pay_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '支付价格',
+  `pay_status` tinyint UNSIGNED NOT NULL DEFAULT '20' COMMENT '支付状态：10支付；20未支付',
+  `pay_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '支付时间',
+  `order_status` tinyint UNSIGNED NOT NULL DEFAULT '20' COMMENT '订单状态：10已发货；20未发货;30已收货；40申请退货；70已退货',
+  `express_no` varchar(30) NOT NULL DEFAULT '' COMMENT '快递单号',
+  `wxpay_no` varchar(30) NOT NULL COMMENT '微信支付编号',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  KEY `order_no`(`order_no`),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单';
+
+drop table if exists `jiihome_order_address`;
+CREATE TABLE `jiihome_order_address` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `order_no` varchar(30) NOT NULL COMMENT '订单编号',
+  `sccept_name` varchar(30) NOT NULL COMMENT '收货人姓名',
+  `telphone` varchar(30) NOT NULL COMMENT '手机号',
+  `area_id` int UNSIGNED NOT NULL COMMENT '地区Id',
+  `area_name` varchar(50) NOT NULL COMMENT '地区长名称',
+  `address` varchar(50) NOT NULL COMMENT '详细地址',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `update_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  KEY `order_no`(`order_no`),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单收货地址';
+
+drop table if exists `jiihome_order_goods`;
+CREATE TABLE `jiihome_order_goods` (
+  `order_no` varchar(30) NOT NULL COMMENT '订单编号',
+  `product_type` tinyint UNSIGNED NOT NULL COMMENT '商品类型；1商品，2.定制',
+  `product_id` int UNSIGNED NOT NULL COMMENT '商品Id',
+  `spec_sku_id` varchar(30) NOT NULL COMMENT '商品sku',
+  `goods_name` varchar(30) NOT NULL COMMENT '商品名',
+  `image_url` varchar(150) NOT NULL COMMENT '商品图',
+  `goods_attr` varchar(150) NOT NULL COMMENT '所选商品属性',
+  `goods_price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00' COMMENT '商品价格',
+  `goods_num` int UNSIGNED NOT NULL COMMENT '商品数量',
+  `create_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  KEY `order_no`(`order_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单商品';
