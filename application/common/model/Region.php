@@ -60,7 +60,7 @@ class Region extends Base
     {
         if (!Cache::get('region')) {
             // 所有地区
-            $all = $allData = self::useGlobalScope(false)->column('id, pid, name, level', 'id');
+            $all = $allData = self::useGlobalScope(false)->column('id, pid, name, level,merger_name', 'id');
             // 格式化
             $tree = [];
             foreach ($allData as $pKey => $province) {

@@ -17,8 +17,11 @@ class Test
         $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 
         $allow_origin = array(
-            'http://jiihomeapidec.shimentown.com',
-            'http://localhost:8002'
+            'http://ji.shimentown.com',
+            'http://jii.shimentown.com',
+            'http://localhost:8002',
+            'http://localhost:8080',
+            'http://localhost:8888',
         );
 
         if(in_array($origin, $allow_origin)) {

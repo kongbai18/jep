@@ -11,5 +11,13 @@ namespace app\common\model;
 
 class FurnitureAttr extends Base
 {
+    public function getlist($id){
+        try{
+            $data = $this->where('fur_id','eq',$id)->select();
+        }catch (\Exception $e){
+            return false;
+        }
 
+        return $data;
+    }
 }

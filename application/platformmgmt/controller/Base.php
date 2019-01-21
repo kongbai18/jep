@@ -16,6 +16,10 @@ use app\platformmgmt\model\Permission as PermissionModel;
 class Base extends Controller
 {
     /**
+     * 用户ID
+     */
+    public $userId;
+    /**
      * 初始化
      * @throws ApiException
      */
@@ -39,6 +43,7 @@ class Base extends Controller
         $user = session(config('admin.session_user'), '', config('admin.session_user_scope'));
 
         if($user && $user->id) {
+            $this->userId = $user->id;
             return true;
         }else{
             return false;

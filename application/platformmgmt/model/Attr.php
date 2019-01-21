@@ -12,20 +12,32 @@ use app\common\model\Attr as AttrModel;
 
 class Attr extends AttrModel
 {
+    public function addAttr($data,$furnitureId){
+        $attrValModel = model('attr_value');
+        foreach ($data as $v){
+            $udata = [
+                'furniture_id' => $furnitureId,
+                'attr_name' => $v['attr_name'],
+                'type_id' => $v['type_id'],
+            ];
+            $attrId = $this->insertGetId($udata);
 
-    /**
-     * 根据规格组名称查询规格id
-     * @param $spec_name
-     * @return mixed
-     */
-    public function getAttrIdByName($attr_name,$type_id)
-    {
-        $attrData = $this->field('id')->where(['attr_name'=>['eq',$attr_name],'type_id'=>['eq',$type_id]])->find();
-
-        if(empty($attrData)){
-            return false;
-        }else{
-            return $attrData->id;
+            foreach ($v['value'] as $item){
+                $udata = [
+                    'attr_id' => $attrId,
+                    'attr_value' => $item['attr_value'],
+                ];
+                $attrValModel->allowField(true)->insert($udata);
+            }
         }
+    }
+
+    public function removeAll($furnitureId){
+        $attr = $this->field('id')->where('furniture_id','eq',$furnitureId)->select();
+        $attrValModel = new AttrValue();
+        foreach ($attr as $v){
+            $attrValModel->where('attr_id','eq',$v['id'])->delete();
+        }
+        $this->where('furniture_id','eq',$furnitureId)->delete();
     }
 }

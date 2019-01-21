@@ -9,15 +9,14 @@
 namespace app\index\controller;
 
 use app\index\model\Cart as CartModel;
-use think\Controller;
 
 
-class Cart extends Controller
+class Cart extends Base
 {
 
     public function index(){
         try{
-            $data = model('cart')->where(['user_id'=>['eq',1],'is_delete'=>['eq',0]])->select();
+            $data = model('cart')->where(['user_id'=>['eq',$this->userId],'is_delete'=>['eq',0]])->select();
         }catch (\Exception $e){
             return show(config('code.error'),$e->getMessage());
         }
@@ -35,12 +34,12 @@ class Cart extends Controller
         }
 
         if (!$goods || $goods->stock_num < $data['goods_num']){
-            return show(config('code.error','商品不存在或库存不足!'));
+            return show(config('code.error','商品库存不足!'));
         }
 
         try{
             $model = new CartModel();
-            $model->addCart($data,$goods,1);
+            $model->addCart($data,$goods,$this->userId);
         }catch (\Exception $e){
             return show(config('code.error'),$e->getMessage(),'',500);
         }
@@ -55,7 +54,7 @@ class Cart extends Controller
             return show(config('code.error'),'此购物车商品不存在');
         }
 
-        if (1 != $cart->user_id){
+        if ($this->userId != $cart->user_id){
             return show(config('code.error'),'您无权删除此购物车商品！');
         }
 

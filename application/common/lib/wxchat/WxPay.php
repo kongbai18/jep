@@ -51,16 +51,16 @@ class WxPay
         $result = $this->postXmlCurl($this->toXml($params), $url);
         $prepay = $this->fromXml($result);
         // 请求失败
-        if ($prepay['return_code'] === 'FAIL') {
+        if ($prepay['return_code'] !== 'SUCCESS') {
             throw new ApiException($prepay['return_msg'],200,config('code.error'));
         }
-        if ($prepay['result_code'] === 'FAIL') {
+        if ($prepay['result_code'] !== 'SUCCESS') {
             throw new ApiException($prepay['err_code_des'],200,config('code.error'));
         }
 
         if($trade_type == 'JSAPI'){
             // 生成 nonce_str 供前端使用
-            $paySign = $this->makePaySign($params['nonce_str'], $prepay['prepay_id'], $time);
+            $paySign = $this->makePaySign($nonceStr, $prepay['prepay_id'], $time);
             return [
                 'prepay_id' => $prepay['prepay_id'],
                 'nonceStr' => $nonceStr,
@@ -106,7 +106,7 @@ class WxPay
     private function makePaySign($nonceStr, $prepay_id, $timeStamp)
     {
         $data = [
-            'appId' => config('wxpay.app_id'),
+            'appId' => config('wxpay.appid'),
             'nonceStr' => $nonceStr,
             'package' => 'prepay_id=' . $prepay_id,
             'signType' => 'MD5',

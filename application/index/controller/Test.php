@@ -9,13 +9,14 @@
 namespace app\index\controller;
 
 use app\common\lib\wxchat\WxPay;
+use app\common\lib\email\Email;
 use think\Controller;
 
 
 class Test extends Controller
 {
     public function index(){
-        $Wxpay = new WxPay();
-        return $Wxpay->orderquery('5346554646');
+        $email = new Email();
+        $email->sendEmail('kongbai0108@126.com',896452);
     }
 }

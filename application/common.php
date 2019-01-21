@@ -50,3 +50,25 @@ function base_url() {
     $subDir = str_replace('\\', '/', dirname($request->server('PHP_SELF')));
     return $request->scheme() . '://' . $request->host() . $subDir . ($subDir === '/' ? '' : '/');
 }
+
+/**
+ * curl请求指定url
+ * @param $url
+ * @param array $data
+ * @return mixed
+ */
+function curl($url, $data = [])
+{
+    // 处理get数据
+    if (!empty($data)) {
+        $url = $url . '?' . http_build_query($data);
+    }
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);//这个是重点。
+    $result = curl_exec($curl);
+    curl_close($curl);
+    return $result;
+}

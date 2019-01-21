@@ -18,6 +18,7 @@
       <path value="$PROJECT_DIR$/vendor/qiniu/docs" />
       <path value="$PROJECT_DIR$/vendor/qiniu/tests" />
       <path value="$PROJECT_DIR$/vendor/qiniu/examples" />
+      <path value="$PROJECT_DIR$/vendor/PHPMailer/PHPMailer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.4.0" />

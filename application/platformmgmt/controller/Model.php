@@ -8,7 +8,7 @@
 
 namespace app\platformmgmt\controller;
 
-use app\platformmgmt\model\Model as ModelModel
+use app\platformmgmt\model\Model as ModelModel;
 
 class Model extends Base
 {
@@ -65,14 +65,14 @@ class Model extends Base
     }
 
 
-    public function edit($id){
+    public function update($id){
         $model = model('model')->find($id);
 
         if(empty($model)){
             return show(config('code.error'),'该模型不存在','', 404);
         }
 
-        $data = input('get.');
+        $data = input('put.');
         $data['id'] = $id;
 
         //validata
@@ -86,14 +86,14 @@ class Model extends Base
         try{
             $result = $modelModle->editModel($data);
         }catch (\Exception $e){
-            return show(config('code.error'),'添加失败');
+            return show(config('code.error'),'修改失败');
         }
 
         if(!$result){
-            return show(config('code.error'),'添加失败');
+            return show(config('code.error'),'修改失败');
         }
 
-        return show(config('code.success'),'添加成功');
+        return show(config('code.success'),'修改成功');
     }
 
     public function delete($id){

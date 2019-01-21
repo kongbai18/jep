@@ -10,6 +10,7 @@ namespace app\platformmgmt\controller;
 
 use app\platformmgmt\model\Furniture as FurnitureModel;
 
+
 class Furniture extends Base
 {
     public function index(){
@@ -41,7 +42,6 @@ class Furniture extends Base
 
     public function save(){
         $data = input('post.');
-
         //validata
 
         $Furniture = new FurnitureModel();
@@ -60,7 +60,7 @@ class Furniture extends Base
 
     }
 
-    public function edit($id){
+    public function update($id){
         $FurnitureModel = new FurnitureModel();
         $furniture = $FurnitureModel->find($id);
 
@@ -68,7 +68,7 @@ class Furniture extends Base
             return show(config('code.error'),'该家具不存在','', 404);
         }
 
-        $data = input('get.');
+        $data = input('put.');
         $data['id'] = $id;
 
         //validata
@@ -83,20 +83,21 @@ class Furniture extends Base
             return show(config('code.error'),'修改失败');
         }
 
-        return show(config('code.success'),'添加家具成功');
+        return show(config('code.success'),'修改家具成功');
     }
 
 
     public function delete($id){
-        $furniture = model('furniture')->find($id);
+        $FurnitureModel = new FurnitureModel();
+        $furniture = $FurnitureModel->find($id);
 
         if(empty($furniture)){
             return show(config('code.error'),'该家具不存在','', 404);
         }
 
-        $Furniture = new FurnitureModel();
+        $result = $FurnitureModel->remove($id);
 
-        if($Furniture->remove($id)){
+        if($result){
             return show(config('code.success'),'删除成功');
         }
 

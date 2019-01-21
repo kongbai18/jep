@@ -9,15 +9,25 @@
 namespace app\common\model;
 
 use app\common\model\GoodsSpec;
+use app\common\model\Category;
+
 class Goods extends Base
 {
     public function getGoodsData($data){
         //搜索条件
         $whereData = [];
         $whereData['is_delete'] = ['eq',0];
+        $whereData['goods_status'] = ['eq',10];
 
         if(isset($data['category_id']) && !empty($data['category_id'])){
-            $whereData['category_id'] = ['eq',$data['category_id']];
+            $categoryModel = new Category();
+            $cateArr = $categoryModel->getChildSelf($data['category_id']);
+            $cateArr =implode(',',$cateArr);
+            $whereData['category_id'] = ['in',$cateArr];
+        }
+
+        if(isset($data['brand_id']) && !empty($data['brand_id'])){
+            $whereData['brand_id'] = ['eq',$data['brand_id']];
         }
 
         if(isset($data['goods_status']) && !empty($data['goods_status'])){
@@ -29,18 +39,20 @@ class Goods extends Base
         }
 
         if(isset($data['keywords']) && !empty($data['keywords'])){
-            $whereData['article_name'] = ['like','%'.trim($data['keywords']).'%'];
+            $whereData['goods_name'] = ['like','%'.trim($data['keywords']).'%'];
         }
 
         //排序方式
         $sortData = ['sort_id'=>'asc'];
-        if(isset($data['sort']) && !empty($data['sort'])){
-            if($data['sort']['type'] == 'goods'){
-                $sortData = ['a.id'=>$data['sort']['order']];
-            }elseif ($data['sort']['type'] == 'sales'){
-                $sortData = ['sales_actual'=>$data['sort']['order']];
-            }elseif ($data['sort']['type'] == 'price'){
-                $sortData = ['min_price'=>$data['sort']['order']];
+        if(isset($data['sort_type']) && !empty($data['sort_type'])){
+            if($data['sort_type'] == 'new'){
+                $sortData = ['a.id'=>'desc'];
+            }elseif ($data['sort_type'] == 'price'){
+                if($data['sort_price']){
+                    $sortData = ['goods_min_price'=>'desc'];
+                }else{
+                    $sortData = ['goods_min_price'=>'asc'];
+                }
             }
         }
 
@@ -89,7 +101,7 @@ class Goods extends Base
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
      */
-    private function getGoods($whereData=[],$sortData=[],$from,$size){
+    public function getGoods($whereData=[],$sortData=[],$from='',$size=''){
         // 多规格商品 最高价与最低价
         $GoodsSpec = model('goods_spec');
         $minPriceSql = $GoodsSpec->field(['MIN(goods_price)'])
@@ -103,13 +115,14 @@ class Goods extends Base
             ->where('goods_id', 'EXP', "= `a`.`id`")->limit(1)->buildSql();
 
         // 执行查询
-        $list = $this->field(['a.*','c.name as cate_name',
+        $list = $this->field(['a.*','d.name as brand_name','c.name as cate_name',
             "$minPriceSql AS goods_min_price",
             "$maxPriceSql AS goods_max_price",
             "$goodsPicSql AS goods_pic"
         ])->alias('a')
             ->join('goods_image b','a.id = b.goods_id','left')
             ->join('category c','a.category_id = c.id','left')
+            ->join('brand d','a.brand_id = d.id','left')
             ->where($whereData)
             ->order($sortData)
             ->limit($from,$size)
@@ -134,6 +147,7 @@ class Goods extends Base
             "$maxPriceSql AS goods_max_price"])
             ->alias('a')
             ->join('category b','a.category_id = b.id','left')
+            ->join('brand c','a.brand_id = c.id','left')
             ->find($goods_id)
             ->toArray();
 

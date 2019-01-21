@@ -28,6 +28,7 @@ class Model extends Base
         }
 
         $data = [
+            'model' => $model,
             'material' => $modelMaterial,
             'parameter' => $modelParameter,
             'formula' => $modelFormula,
@@ -41,9 +42,13 @@ class Model extends Base
         $modelMaterialModel = model('model_material');
 
         $material = $modelMaterialModel->where(['model_id'=>['eq',$model_id]])->select()->toArray();
+       //商品图
+        $GoodsImage = model('goods_image');
+        $goodsPicSql =  $GoodsImage->field('image_url')
+            ->where('goods_id', 'EXP', "= `a`.`id`")->limit(1)->buildSql();
 
         foreach ($material as &$v){
-            $goods = model('goods')->where(['id'=>['in',$v['material_goods']]])->select();
+            $goods = model('goods')->field(['a.id','a.goods_name',"$goodsPicSql AS goods_pic"])->alias('a')->where(['id'=>['in',$v['material_goods']]])->select();
             $v['goods'] = $goods;
         }
 
@@ -70,6 +75,11 @@ class Model extends Base
         $modelExtModel = model('model_ext');
 
         $ext = $modelExtModel->where(['model_id'=>['eq',$model_id]])->select()->toArray();
+
+        foreach ($ext as &$v){
+            $value = model('model_ext_val')->where('ext_id','eq',$v['id'])->select();
+            $v['value'] = $value;
+        }
 
         return $ext;
     }

@@ -25,7 +25,7 @@ class SpecValue extends SepcValueModel
         if(empty($sepcValueData)){
             return false;
         }else{
-            return $sepcValueData->id;
+            return $sepcValueData;
         }
     }
 }

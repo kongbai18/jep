@@ -68,6 +68,7 @@ class Article extends ArticleModel
                 $udata[] = [
                   'article_id' => $articleId,
                   'goods_id' => $v['goods_id'],
+                  'goods_name' => $v['goods_name'],
                 ];
             }
             $articleGoodsRelModel->saveAll($udata);
@@ -75,7 +76,6 @@ class Article extends ArticleModel
     }
 
     public function remove($article_id){
-        $article_id = int($article_id);
         $articleGoodsRelModel = new ArticleGoodsRelModel();
         // 开启事务
         Db::startTrans();

@@ -12,6 +12,12 @@ use app\platformmgmt\model\Goods as GoodsModel;
 
 class Goods extends Base
 {
+
+    public function getAllGoods(){
+        $data = model('goods')->where('is_delete','eq',0)->select();
+
+        return show(config('code.success'),'获取所有商品成功',$data);
+    }
     /**
      * @SWG\Get(path="/platformMgmt/v1/goods",
      *   summary="获取商品列表信息",

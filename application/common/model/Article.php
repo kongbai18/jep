@@ -17,14 +17,13 @@ class Article extends Base
      * @return array
      */
     public function getArticleData($data){
-        $whereData = [];
-
+        $whereData['a.is_index'] = ['eq',1];
         if(isset($data['cate_id']) && !empty($data['cate_id'])){
             $whereData['cate_id'] = ['eq',$data['cate_id']];
         }
 
-        if(isset($data['is_index']) && !empty($data['is_index'])){
-            $whereData['is_index'] = ['eq',$data['is_index']];
+        if(isset($data['is_index'])){
+            $whereData['a.is_index'] = ['eq',$data['is_index']];
         }
 
         if(isset($data['keywords']) && !empty($data['keywords'])){
@@ -63,7 +62,7 @@ class Article extends Base
      * @return int|string
      */
     public function getArticleCount($whereData){
-        return $this->where($whereData)->count();
+        return $this->alias('a')->where($whereData)->count();
     }
 
 
@@ -78,7 +77,7 @@ class Article extends Base
      * @throws \think\exception\DbException
      */
     public function getArticle($whereData,$from,$size){
-        $result = $this->field('a.*,b.name')
+        $result = $this->field('a.id,a.article_name,a.article_brief,a.image_url,b.name')
             ->alias('a')
             ->join('article_cate b','a.cate_id = b.id','left')
             ->where($whereData)
@@ -92,13 +91,34 @@ class Article extends Base
     public function getArticleDetail($article_id){
         $article = $this->find($article_id);
 
-        $goodsId = model('article_goods_rel')->where(['article_id'=>['eq',$article_id]])->select()->toArray();
+        // 多规格商品 最高价与最低价
+        $GoodsSpec = model('goods_spec');
+        $minPriceSql = $GoodsSpec->field(['MIN(goods_price)'])
+            ->where('goods_id', 'EXP', "= `a`.`id`")->buildSql();
+        $maxPriceSql = $GoodsSpec->field(['MAX(goods_price)'])
+            ->where('goods_id', 'EXP', "= `a`.`id`")->buildSql();
 
-        //$goodsData = model('goods')->getGoodsDataById($goodsId);
+        //商品图
+        $GoodsImage = model('goods_image');
+        $goodsPicSql =  $GoodsImage->field('image_url')
+            ->where('goods_id', 'EXP', "= `a`.`id`")->limit(1)->buildSql();
+
+        // 执行查询
+        $goods = model('goods')->field(['a.id','a.goods_name',
+            "$minPriceSql AS goods_min_price",
+            "$maxPriceSql AS goods_max_price",
+            "$goodsPicSql AS goods_pic"
+        ])->alias('a')
+            ->join('goods_image b','a.id = b.goods_id','left')
+            ->join('article_goods_rel c','a.id = c.goods_id','right')
+            ->where(['c.article_id'=>['eq',$article_id]])
+            ->group('a.id')
+            ->select()
+            ->toArray();
 
         $data = [
             'article' => $article,
-            'goods' => $goodsId,
+            'goods' => $goods,
         ];
 
         return $data;

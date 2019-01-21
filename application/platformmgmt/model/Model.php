@@ -9,7 +9,7 @@
 namespace app\platformmgmt\model;
 
 use think\Db;
-use app\common\model\Model as ModelModel
+use app\common\model\Model as ModelModel;
 use app\common\model\ModelMaterial as ModelMaterialModel;
 use app\common\model\ModelParameter as ModelParameterModel;
 use app\common\model\ModelFormula as ModelFormulaModel;
@@ -34,17 +34,18 @@ class Model extends ModelModel
             Db::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             Db::rollback();
         }
         return false;
     }
 
-    public function aditModel($data){
+    public function editModel($data){
         // 开启事务
         Db::startTrans();
         try {
             // 添加基本信息
-            $this->add($data);
+            $this->edit($data);
             // 添加相关材料
             $this->addModelMaterial($data['material'],$data['id'],true);
             //添加相关参数
@@ -69,8 +70,9 @@ class Model extends ModelModel
         foreach ($material as $v){
             $udata[] = [
                 'model_id' => $modelId,
+                'material_name' => $v['name'],
                 'material_para' => $v['para'],
-                'material_goods' => json_encode($v['goods']),
+                'material_goods' => $v['goods'],
             ];
         }
         $modelMaterialModel->saveAll($udata);
@@ -79,10 +81,12 @@ class Model extends ModelModel
 
     private function addModelParameter($parameter,$modelId){
         $modelParameterModel = new ModelParameterModel();
-
+        $oldPara = $modelParameterModel->field('id')->where('model_id','eq',$modelId)->select()->toArray();
+        $upOldPara = [];
         $udata = [];
         foreach ($parameter as $v){
-            if(isset($v['id'] && !empty($v['id']))){
+            if(!empty($v['id'])){
+                $upOldPara[] = $v['id'];
                 $udata[] = [
                     'id' => $v['id'],
                     'model_id' => $modelId,
@@ -93,6 +97,17 @@ class Model extends ModelModel
                     'model_id' => $modelId,
                     'parameter' => $v['para'],
                 ];
+            }
+        }
+        foreach ($oldPara as $v){
+            $isDel = true;
+            foreach ($upOldPara as $item){
+                if($v['id'] == $item){
+                    $isDel = false;
+                }
+            }
+            if($isDel){
+                $modelParameterModel->where('id','eq',$v['id'])->delete();
             }
         }
         $modelParameterModel->saveAll($udata);
@@ -109,7 +124,6 @@ class Model extends ModelModel
                 'formula_name' => $v['formula_name'],
                 'number' => $v['number'],
                 'price' => $v['price'],
-                'total_price' => $v['total_price'],
                 'unit' => $v['unit'],
                 'remark' => $v['remark'],
             ];
@@ -117,21 +131,32 @@ class Model extends ModelModel
         $modelFormulaModel->saveAll($udata);
     }
 
-    private function addModelExt($formula,$modelId,$isUpdate = false){
+    private function addModelExt($ext,$modelId,$isUpdate = false){
         $modelExtModel = new ModelExtModel();
         $isUpdate && $modelExtModel->removeAll($modelId);
 
-        $udata = [];
-        foreach ($formula as $v){
-            $udata[] = [
+
+        foreach ($ext as $v){
+            $udata = [
                 'model_id' => $modelId,
                 'type_id' => $v['type_id'],
                 'ext_name' => $v['ext_name'],
                 'ext_para' => $v['ext_para'],
-                'ext_val' => $v['ext_val'],
             ];
+            $extId = $modelExtModel->insertGetId($udata);
+
+            if($v['type_id'] == 1 || $v['type_id'] == 2){
+                foreach ($v['value'] as $item){
+                    $udata = [
+                        'ext_id' => $extId,
+                        'par_name' => $item['par_name'],
+                        'ext_val' => $item['ext_val'],
+                    ];
+                    model('model_ext_val')->insert($udata);
+                }
+            }
+
         }
-        $modelExtModel->saveAll($udata);
     }
 
     public function remove($model_id){
@@ -143,7 +168,7 @@ class Model extends ModelModel
             $modelFormulaModel = new ModelFormulaModel();
             $modelExtModel = new ModelExtModel();
             // 删除基本信息
-            $this->delete($model_id);
+            $this->where('id','eq',$model_id)->delete();
             // 删除相关材料
             $modelMaterialModel->removeAll($model_id);
             // 删除相关参数

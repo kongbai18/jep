@@ -15,7 +15,7 @@ use app\index\model\Goods as GoodsModel;
 class Goods extends Controller
 {
     public function index(){
-        $data = input('get.');
+        $data = input('post.');
 
         $goodsModel = new GoodsModel();
 

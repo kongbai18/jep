@@ -8,7 +8,7 @@
 
 namespace app\platformmgmt\model;
 
-use thinl\Db;
+use think\Db;
 use app\common\model\Furniture as FurnitureModel;
 
 class Furniture extends FurnitureModel
@@ -42,6 +42,7 @@ class Furniture extends FurnitureModel
             Db::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             Db::rollback();
         }
         return false;
@@ -53,37 +54,31 @@ class Furniture extends FurnitureModel
      * @param $isUpdate
      * @throws \Exception
      */
-    private function addFurnitureAttr(&$data,$furnitureId,$isUpdate = false)
+    private function addFurnitureAttr($data,$furnitureId,$isUpdate = false)
     {
         // 更新模式: 先删除所有规格
-        $furnitureAttrModel = model('furniture_attr');
-        $isUpdate && $furnitureAttrModel->removeAll($furnitureId);
+        $AttrModel = new Attr();
+        $isUpdate && $AttrModel->removeAll($furnitureId);
         // 添加规格数据
-        if ($data['attr_type'] === '10') {
-            // 单规格
-            $furnitureAttrModel->allowField(true)->save($data['attr']);
-        } else if ($data['spec_type'] === '20') {
-            // 添加商品与规格关系记录
-            $furnitureAttrModel->addFurnitureAttrRel($furnitureId, $data['attr_many']['attr_attr']);
-            // 添加商品sku
-            $furnitureAttrModel->addSkuList($furnitureId, $data['attr_many']['attr_list']);
-        }
+        $AttrModel->addAttr($data['attr'],$furnitureId);
     }
 
-    public function remove($fur_id){
-        $FurnitureExt = model('fur_ext_attr');
+    public function remove($id){
+        $attrModel =new Attr();
         // 开启事务
         Db::startTrans();
         try {
             // 删除家具
-            $this->delete($fur_id);
+            $this->where('id','eq',$id)->delete();
             // 删除扩展属性
-            $FurnitureExt->removeAll($fur_id);
+            $attrModel->removeAll($id);
             Db::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             Db::rollback();
         }
         return false;
     }
+
 }

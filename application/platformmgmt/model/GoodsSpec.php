@@ -20,7 +20,8 @@ class GoodsSpec extends GoodsSpecModel
      */
     public function addSkuList($goods_id, $spec_list)
     {
-        $data = [];
+        $specData = $this->field('id')->where('goods_id','eq',$goods_id)->select();
+        $oldId = [];
         foreach ($spec_list as $item) {
             $spec_sku_id = [];
             foreach ($item['sku'] as $v){
@@ -28,12 +29,31 @@ class GoodsSpec extends GoodsSpecModel
             }
             sort($spec_sku_id,SORT_NUMERIC);
             $spec_sku_id = (string)implode('_',$spec_sku_id);
-            $data[] = array_merge($item['form'], [
+
+            $data = array_merge($item['form'], [
                 'spec_sku_id' => $spec_sku_id,
                 'goods_id' => $goods_id,
             ]);
+            if(isset($data['id']) && $data['id']){
+                $this->where('id','eq',$data['id'])->update($data);
+                $oldId[] = $data['id'];
+            }else{
+                unset($data['id']);
+                $this->add($data);
+            }
         }
-        return $this->saveAll($data);
+
+        foreach ($specData as $v){
+            $isDel = true;
+            foreach ($oldId as $item){
+                if($v['id'] == $item){
+                    $isDel = false;
+                }
+            }
+            if($isDel){
+                $this->where('id','eq',$v['id'])->delete();
+            }
+        }
     }
 
     /**

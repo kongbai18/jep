@@ -10,6 +10,8 @@ namespace app\index\model;
 
 use app\common\model\Order as OrderModle;
 use app\common\lib\exception\ApiException;
+use app\common\model\OrderGoods as OrderGoodsModel;
+use think\Db;
 
 class Order extends  OrderModle
 {
@@ -21,7 +23,10 @@ class Order extends  OrderModle
             // 订单地址
             $this->addOrderAddress($data['address_id'],$orderNo);
             // 订单商品
-            $price = $this->addOrderGoods($data['goods'],$orderNo);
+            if(is_string($data['goods'])){
+                $data['goods'] = json_decode($data['goods'],true);
+            }
+            $price = $this->addOrderGoods($data['goods'],$orderNo,$userId);
             //订单
             $udata = [
                 'order_no' => $orderNo,
@@ -29,16 +34,18 @@ class Order extends  OrderModle
                 'total_price' => $price,
                 'pay_price' => $price,
             ];
-            $this->add($udata);
+            $id = $this->add($udata);
         } catch (\Exception $e) {
             Db::rollback();
+            return false;
         }
 
         Db::commit();
+        return $id;
     }
 
     private function addOrderAddress($addressId,$orderNo){
-        $address = model('address')->find($addressId);
+        $address = model('address')->find($addressId)->toArray();
         unset($address['id']);
         unset($address['user_id']);
         unset($address['create_time']);
@@ -47,10 +54,15 @@ class Order extends  OrderModle
         model('order_address')->save($address);
     }
 
-    private function addOrderGoods($goods,$orderNo){
+    private function addOrderGoods($goods,$orderNo,$userId){
         $price = 0;
-
+         $cartModel = model('cart');
+         $cartWhere['user_id'] = ['eq',$userId];
          foreach ($goods as $v){
+             $cartWhere['product_type'] = ['eq',$v['product_type']];
+             $cartWhere['product_id'] = ['eq',$v['product_id']];
+             $cartWhere['spec_sku_id'] = ['eq',$v['spec_sku_id']];
+             $cartModel->where($cartWhere)->delete();
              if($v['product_type'] == 1){
                  $spec = model('goods_spec')->where(['goods_id'=>['eq',$v['product_id']],'spec_sku_id'=>['eq',$v['spec_sku_id']]])->find();
 
@@ -59,7 +71,7 @@ class Order extends  OrderModle
                  }
 
                  $udata = [
-                     'ordere_no' => $orderNo,
+                     'order_no' => $orderNo,
                      'product_type' => $v['product_type'],
                      'product_id' => $v['product_id'],
                      'spec_sku_id' => $v['spec_sku_id'],
@@ -67,30 +79,33 @@ class Order extends  OrderModle
                      'goods_num' => $v['goods_num'],
                      'image_url' => $spec['image_url'],
                      'goods_price' => $spec['goods_price'],
+                     'create_time' => time(),
                  ];
 
                  if($v['spec_sku_id'] == 0){
                      $udata['goods_attr'] = '默认';
                  }else{
-                     $spec = explode('_',$v['spec_sku_id']);
+                     $specArr = explode('_',$v['spec_sku_id']);
 
                      $specVal = model('spec_value')->field('a.spec_value_alt,b.spec_name')
                          ->alias('a')
-                         ->where(['a.id'=>['in',$spec]])
+                         ->where(['a.id'=>['in',$specArr]])
                          ->join('spec b','a.spec_id = b.id','left')
                          ->select()
                          ->toArray();
 
                      $attr = [];
 
-                     foreach($specVal as $v){
-                         $attr[] = $v['spec_name'].':'.$v['spec_value_alt'];
+                     foreach($specVal as $item){
+                         $attr[] = $item['spec_name'].':'.$item['spec_value_alt'];
                      }
 
                      $udata['goods_attr'] = implode(';',$attr);
                  }
 
-                 model('order_goods')->save($udata);
+                 $OrderGoodsModel =new OrderGoodsModel();
+                 $OrderGoodsModel->save($udata);
+
 
                  $price = $price + $spec['goods_price'] * $v['goods_num'];
              }

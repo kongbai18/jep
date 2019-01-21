@@ -7,7 +7,7 @@
  */
 
 return [
-  'appid' => 'wx6bf5eec027a0fe45',
-  'mch_id'=> '1511613151',
-  'key' => 'sds2156ddsfD25SsWdfA56465SAdfDds',
+  'appid' => 'wx6a73b5816054ba24',
+  'mch_id'=> '1501109211',
+  'key' => 'JBkjkj54adDSskjKL54SDjsd35sdsJHs',
 ];

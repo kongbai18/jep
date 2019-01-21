@@ -44,11 +44,11 @@ class Goods extends GoodsModel
         Db::startTrans();
         try {
             // 保存商品
-            $this->allowField(true)->save($data);
+            $this->edit($data);
             // 商品规格
-            $this->addGoodsSpec($data,$data['goods_id'], true);
+            $this->addGoodsSpec($data,$data['id'], true);
             // 商品图片
-            $this->addGoodsImages($data['images'],$data['goods_id']);
+            $this->addGoodsImages($data['images'],$data['id']);
             Db::commit();
             return true;
         } catch (\Exception $e) {
@@ -93,23 +93,23 @@ class Goods extends GoodsModel
     {
         // 更新模式: 先删除所有规格
         $goodsSpecModel = new GoodsSpec;
-        $isUpdate && $goodsSpecModel->removeAll($goodsId);
         // 添加规格数据
         if ($data['spec_type'] === '10') {
+            $isUpdate && $goodsSpecModel->removeAll($goodsId);
             // 单规格
             $data['spec']['goods_id'] = $goodsId;
             try{
                 $goodsSpecModel->allowField(true)->save($data['spec']);
             }catch (\Exception $e){
-                var_dump($e->getMessage());
+               return false;
             }
 
         } else if ($data['spec_type'] === '20') {
+                $isUpdate && model('goods_spec_rel')->where('goods_id','=', $goodsId)->delete();
                 // 添加商品与规格关系记录
                 $goodsSpecModel->addGoodsSpecRel($goodsId, $data['spec_many']['spec_attr']);
                 // 添加商品sku
                 $goodsSpecModel->addSkuList($goodsId, $data['spec_many']['spec_list']);
-
         }
     }
 

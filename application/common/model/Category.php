@@ -78,11 +78,18 @@ class Category extends Base
             foreach ($child as $item){
                 if($v['id'] == $item){
                     unset($rdata[$k]);
-
                 }
             }
         }
         return $rdata;
+    }
+
+    public function getChildSelf($id){
+        //获得所有分类数据
+        $data = $this->getList();
+        $child = $this->_getChild($id,$data,true);
+        $child[] = $id;
+        return $child;
     }
 
     private function _getChild($id,$data,$isClear = FALSE){

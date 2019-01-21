@@ -150,7 +150,7 @@ class Permission extends PermissionModel
                 ->join('role_permission b','a.role_id = b.role_id','left')
                 ->join('permission c','b.per_id = c.id','left')
                 ->where(['a.admin_id'=>['eq',$adminId]])
-                ->order(['c.id','c.sort_id' => 'asc'])
+                ->order(['c.id' => 'asc'])
                 ->group('c.id')
                 ->select()
                 ->toArray();

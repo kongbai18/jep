@@ -147,8 +147,6 @@ class Article extends Base
             return show(config('code.error'),'该文章不存在','', 404);
         }
 
-
-
         // validate
         $validate = validate('Article');
         if(!$validate->check($data)) {

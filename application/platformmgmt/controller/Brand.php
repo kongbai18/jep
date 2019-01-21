@@ -71,4 +71,21 @@ class Brand extends Base
 
         return show(config('code.success'),'修改品牌信息成功！');
     }
+
+    public function delete($id){
+        //判断品牌下是否存在商品
+        $count=model('goods')->where(['brand_id'=>['eq',$id]])->count();
+
+        if($count > 0){
+            return show(config('code.error'),'有商品包含此品牌，不可删除');
+        }
+
+        //执行删除
+        try{
+            model('brand')->where(['id'=>['eq',$id]])->delete();
+        }catch(\Exception $e){
+            return show(config('code.error'),'删除失败','',500);
+        }
+        return show(config('code.success'),'删除品牌成功');
+    }
 }

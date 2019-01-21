@@ -40,8 +40,7 @@ class Furniture extends Base
 
         $data = [
             'furniture' => $furniture,
-            'furnitureAttrData' => $furnitureAttr['furnitureAttrData'],
-            'furnitureAttrRelData' => $furnitureAttr['furnitureAttrRelData'],
+            'attrData' => $furnitureAttr,
         ];
 
         return $data;
@@ -50,26 +49,18 @@ class Furniture extends Base
 
     /**
      * 获取规格信息
-     * @param \think\Collection $spec_rel
-     * @param \think\Collection $skuData
      * @return array
      */
     private function getManyAttrData($fur_id){
-        $furnitureAttrModel = model('furniture_attr');
-        $furnitureAttrData = $furnitureAttrModel->where(['fur_id'=>['eq',$fur_id]])->select()->toArray();
+        $attrModel = model('attr');
+        $attrData = $attrModel->field('id,attr_name,type_id')->where('furniture_id','eq',$fur_id)->select();
 
-        $furnitureAttrRelModel = model('furniture_attr_rel');
-        $furnitureAttrRelData = $furnitureAttrRelModel->field('a.attr_id,a.attr_value_id,b.attr_name,b.type_id,c.attr_value')
-            ->alias('a')
-            ->join('attr b','a.attr_id = b.id','left')
-            ->join('attr_value c','a.attr_value_id = c.id','left')
-            ->where(['fur_id'=>['eq',$fur_id]])->select()->toArray();
+        $attrValModel = model('attr_value');
+        foreach ($attrData as &$v){
+            $val = $attrValModel->field('id,attr_value')->where('attr_id','eq',$v['id'])->select();
+            $v['value'] = $val;
+        }
 
-        $goodsSpec = [
-            'furnitureAttrData' => $furnitureAttrData,
-            'furnitureAttrRelData' => $furnitureAttrRelData,
-        ];
-
-        return $goodsSpec;
+        return $attrData;
     }
 }

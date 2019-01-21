@@ -70,37 +70,41 @@ class Spec extends Base
                 $data['spec_id'] = $specId;
                 $specValueId = $this->SpecValueModel->add($data);
             }catch (\Exception $e){
-                return show(config('error'),'系统内部错误','',500);
+                return show(config('code.error'),'系统内部错误','',500);
             }
 
             $rdata = [
                 'spec_id' => (int)$specId,
                 'spec_value_id' => (int)$specValueId,
+                'spec_value' => $data['spec_value'],
             ];
 
             return show(config('code.success'),'',$rdata);
         }
         // 判断规格值是否存在
-        if ($specValueId = $this->SpecValueModel->getSpecValueIdByName($specId,$data['spec_value_alt'])) {
+        $specValueData = $this->SpecValueModel->getSpecValueIdByName($specId,$data['spec_value_alt']);
+        if ($specValueData['id']) {
             $rdata = [
                 'spec_id' => (int)$specId,
-                'spec_value_id' => (int)$specValueId,
+                'spec_value_id' => (int)$specValueData['id'],
+                'spec_value' => $specValueData['spec_value'],
             ];
-            return show(config('success'),'',$rdata);
+            return show(config('code.success'),'',$rdata);
         }
         // 添加规则值
         $data['spec_id'] = $specId;
         try{
             $specValueId = $this->SpecValueModel->add($data);
         }catch (\Exception $e){
-            return show(config('error'),'系统内部错误','',500);
+            return show(config('code.error'),'系统内部错误','',500);
         }
 
         $rdata = [
             'spec_id' => (int)$specId,
             'spec_value_id' => (int)$specValueId,
+            'spec_value' => $data['spec_value'],
         ];
-        return show(config('success'),'',$rdata);
+        return show(config('code.success'),'',$rdata);
     }
 
     /**
@@ -136,13 +140,13 @@ class Spec extends Base
         try{
             $specValueId = $this->SpecValueModel->add($data);
         }catch (\Exception $e){
-            return show(config('error'),'系统内部错误','',500);
+            return show(config('code.error'),'系统内部错误','',500);
         }
 
         $rdata = [
             'spec_id' => (int)$data['spec_id'],
             'spec_value_id' => (int)$specValueId,
         ];
-        return show(config('success'),'',$rdata);
+        return show(config('code.success'),'',$rdata);
     }
 }
