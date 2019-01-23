@@ -20,7 +20,7 @@ class SpecValue extends SepcValueModel
      */
     public function getSpecValueIdByName($spec_id,$spec_value_alt)
     {
-        $sepcValueData = $this->field('id')->where(['spec_value_alt'=>['eq',$spec_value_alt],'spec_id'=>['eq',$spec_id]])->find();
+        $sepcValueData = $this->field('id,spec_value')->where(['spec_value_alt'=>['eq',$spec_value_alt],'spec_id'=>['eq',$spec_id]])->find();
 
         if(empty($sepcValueData)){
             return false;

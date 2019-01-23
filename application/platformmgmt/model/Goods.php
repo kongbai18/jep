@@ -94,7 +94,7 @@ class Goods extends GoodsModel
         // 更新模式: 先删除所有规格
         $goodsSpecModel = new GoodsSpec;
         // 添加规格数据
-        if ($data['spec_type'] === '10') {
+        if ($data['spec_type'] == '10') {
             $isUpdate && $goodsSpecModel->removeAll($goodsId);
             // 单规格
             $data['spec']['goods_id'] = $goodsId;
@@ -104,7 +104,7 @@ class Goods extends GoodsModel
                return false;
             }
 
-        } else if ($data['spec_type'] === '20') {
+        } else if ($data['spec_type'] == '20') {
                 $isUpdate && model('goods_spec_rel')->where('goods_id','=', $goodsId)->delete();
                 // 添加商品与规格关系记录
                 $goodsSpecModel->addGoodsSpecRel($goodsId, $data['spec_many']['spec_attr']);

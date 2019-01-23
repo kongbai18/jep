@@ -39,7 +39,7 @@ class GoodsSpec extends GoodsSpecModel
                 $oldId[] = $data['id'];
             }else{
                 unset($data['id']);
-                $this->add($data);
+                $this->insert($data);
             }
         }
 
