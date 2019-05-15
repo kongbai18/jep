@@ -13,11 +13,9 @@ use app\common\model\Category;
 
 class Goods extends Base
 {
-    public function getGoodsData($data){
+    public function getGoodsData($data,$whereData = []{
         //搜索条件
-        $whereData = [];
         $whereData['is_delete'] = ['eq',0];
-        $whereData['goods_status'] = ['eq',10];
 
         if(isset($data['category_id']) && !empty($data['category_id'])){
             $categoryModel = new Category();

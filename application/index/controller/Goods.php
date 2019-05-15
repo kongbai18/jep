@@ -19,7 +19,8 @@ class Goods extends Controller
 
         $goodsModel = new GoodsModel();
 
-        $rdata = $goodsModel->getGoodsData($data);
+        $whereData['goods_status'] = ['eq',10];
+        $rdata = $goodsModel->getGoodsData($data,$whereData);
 
         return show(config('code.success'),'获取商品列表成功',$rdata);
     }
